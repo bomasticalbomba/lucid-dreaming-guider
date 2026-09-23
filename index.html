@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lucid Dreaming — A Practical Guide to Waking Up Inside Your Dreams</title>
-<meta name="description" content="A practical, beginner-friendly guide to lucid dreaming: dream recall, persistent realities, advanced control, the Effort Paradox, staying longer in dreams, and the best resources to learn from." />
+<meta name="description" content="A practical, beginner-friendly guide to lucid dreaming: dream recall, reality checks, persistent realities, advanced control, the Effort Paradox, staying longer in dreams, and the best resources to learn from." />
 <meta name="theme-color" content="#07040f" />
 
 <script>document.documentElement.classList.add('js');</script>
@@ -77,26 +77,9 @@
   .lang-btn:not(.active):hover { color: #fff; background: rgba(255,255,255,.08); }
 
   .glow-text { text-shadow: 0 0 28px rgba(168,85,247,.45), 0 0 70px rgba(99,102,241,.25); }
-
-  /* Ensure gradient text has enough room — critical for Arabic descenders */
-  .glow-text {
-    padding-top: 0.08em;
-    padding-bottom: 0.18em;
-  }
-
-  /* Arabic mode: give the big headline more vertical space so
-     letters like ح/م/و/ج don't get clipped by bg-clip-text */
-  html[lang="ar"] h1.glow-text {
-    line-height: 1.5;
-    padding-top: 0.15em;
-    padding-bottom: 0.4em;
-  }
-
-  /* Also protect Arabic section headings (h2 / h3) that use gradient text */
-  html[lang="ar"] h2, html[lang="ar"] h3 {
-    line-height: 1.55;
-    padding-bottom: 0.15em;
-  }
+  .glow-text { padding-top: 0.08em; padding-bottom: 0.18em; }
+  html[lang="ar"] h1.glow-text { line-height: 1.5; padding-top: 0.15em; padding-bottom: 0.4em; }
+  html[lang="ar"] h2, html[lang="ar"] h3 { line-height: 1.55; padding-bottom: 0.15em; }
 
   .card-glass { background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.02)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   ::selection { background: rgba(168,85,247,.4); color: #fff; }
@@ -125,9 +108,10 @@
       <span class="text-base font-extrabold tracking-tight text-white sm:text-lg" data-en="Lucid Dreaming" data-ar="الحلم الواضح">Lucid Dreaming</span>
     </a>
 
-    <div class="hidden items-center gap-4 text-[13px] font-medium text-indigo-200/70 xl:flex">
+    <div class="hidden items-center gap-3 text-[13px] font-medium text-indigo-200/70 xl:flex">
       <a href="#what"      class="transition hover:text-white" data-en="What It Is"  data-ar="ما هو">What It Is</a>
       <a href="#recall"    class="transition hover:text-white" data-en="Recall"      data-ar="الاسترجاع">Recall</a>
+      <a href="#checks"    class="transition hover:text-white" data-en="Reality Checks" data-ar="فحوص الواقع">Reality Checks</a>
       <a href="#realities" class="transition hover:text-white" data-en="Realities"   data-ar="الواقع المستمر">Realities</a>
       <a href="#control"   class="transition hover:text-white" data-en="Control"     data-ar="التحكم">Control</a>
       <a href="#longer"    class="transition hover:text-white" data-en="Stay Longer" data-ar="البقاء أطول">Stay Longer</a>
@@ -178,11 +162,11 @@
 
     <div class="mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
       <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="8" data-ar="٨">8</div>
+        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="9" data-ar="٩">9</div>
         <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Core sections" data-ar="أقسام أساسية">Core sections</div>
       </div>
       <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="15+" data-ar="+١٥">15+</div>
+        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="20+" data-ar="+٢٠">20+</div>
         <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Techniques" data-ar="تقنيات">Techniques</div>
       </div>
       <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
@@ -404,11 +388,258 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 03 — PERSISTENT REALITIES ======================= -->
-  <section id="realities" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <!-- ======================= SECTION 03 — REALITY CHECKS ======================= -->
+  <section id="checks" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 03" data-ar="القسم ٠٣">Section 03</span>
+      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+        <span data-en="Reality Checks — The Doorway to Lucidity" data-ar="فحوص الواقع — بوابة الوضوح">Reality Checks — The Doorway to Lucidity</span>
+      </h2>
+
+      <div class="space-y-5 text-base leading-relaxed text-indigo-100/80 sm:text-lg">
+        <p data-en="A reality check is a small, deliberate test you perform to determine whether you are awake or dreaming. On its own, a single check does nothing. Performed as a consistent habit — ten to fifteen times a day, for weeks — it becomes the single most powerful trigger for lucid dreaming, because it trains your mind to question reality automatically. That question, fired at the right moment inside a dream, is what makes you lucid."
+           data-ar="فحص الواقع هو اختبار صغير متعمّد تجريه لتحدّد ما إذا كنت مستيقظًا أم تحلم. الفحص الواحد بمفرده لا يفعل شيئًا. لكن حين يصبح عادة ثابتة — عشر إلى خمس عشرة مرة يوميًا، لأسبوعين أو أكثر — يصبح أقوى محفّز منفرد للحلم الواضح، لأنه يدرّب عقلك على التشكيك في الواقع تلقائيًا. وهذا السؤال، حين يُطلَق في اللحظة المناسبة داخل الحلم، هو ما يجعلك واعيًا.">
+          A reality check is a small, deliberate test you perform to determine whether you are awake or dreaming. On its own, a single check does nothing. Performed as a consistent habit — ten to fifteen times a day, for weeks — it becomes the single most powerful trigger for lucid dreaming, because it trains your mind to question reality automatically. That question, fired at the right moment inside a dream, is what makes you lucid.
+        </p>
+
+        <p class="rounded-2xl border border-fuchsia-400/20 bg-fuchsia-500/5 p-5 text-sm font-medium text-fuchsia-100 sm:text-base"
+           data-en="Why it works: in waking life you never question whether you're awake. In a dream you don't either — unless you've trained yourself to. Reality checks build that questioning reflex until it fires on its own, including while you're dreaming."
+           data-ar="لماذا تنجح؟ في اليقظة لا تشك أبدًا في أنك مستيقظ. وفي الحلم لا تشك أيضًا — إلا إذا درّبت نفسك على ذلك. فحوص الواقع تبني هذا المنعكس التساؤلي حتى يُطلَق من تلقاء نفسه، حتى وأنت تحلم.">
+          Why it works: in waking life you never question whether you're awake. In a dream you don't either — unless you've trained yourself to. Reality checks build that questioning reflex until it fires on its own, including while you're dreaming.
+        </p>
+      </div>
+
+      <!-- The best reality checks -->
+      <h3 class="mb-6 mt-14 text-2xl font-bold text-white sm:text-3xl">
+        <span data-en="The seven best reality checks" data-ar="أفضل سبعة فحوص للواقع">The seven best reality checks</span>
+      </h3>
+      <p class="mb-6 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
+         data-en="No single check is perfect — use two or three together. The most reliable combination is the hand check plus the nose pinch."
+         data-ar="لا يوجد فحص واحد مثالي — استخدم اثنين أو ثلاثة معًا. أكثر تركيبة موثوقة هي فحص اليدين مع قرص الأنف.">
+        No single check is perfect — use two or three together. The most reliable combination is the hand check plus the nose pinch.
+      </p>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">👋</span>
+            <h4 class="font-bold text-white" data-en="1. The Hand Check" data-ar="١. فحص اليدين">1. The Hand Check</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Look at your hands. Count your fingers slowly. Look away for two seconds and look back. In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or a different number on the second look. This is the most popular reality check because it works almost every time."
+             data-ar="انظر إلى يديك. عُدّ أصابعك ببطء. انظر بعيدًا لثانيتين ثم عُد. في الأحلام تكون الأصابع غالبًا خاطئة — أكثر من اللازم، أو أقل، أو ذائبة، أو مشوّشة، أو بعدد مختلف عند النظرة الثانية. هذا أشهر فحص للواقع لأنه ينجح في كل مرة تقريبًا.">
+            Look at your hands. Count your fingers slowly. Look away for two seconds and look back. In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or a different number on the second look. This is the most popular reality check because it works almost every time.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">👃</span>
+            <h4 class="font-bold text-white" data-en="2. The Nose Pinch" data-ar="٢. قرص الأنف">2. The Nose Pinch</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use."
+             data-ar="أغمض فتحتي أنفك بإصبعيك وحاول الشهيق من أنفك. في اليقظة لا يمرّ هواء. أما في الحلم فيمرّ الهواء رغم ذلك — لأن جسد الحلم لا يخضع لفيزياء اليقظة. هذا أكثر فحص موثوقية، وهو الذي يستخدمه معظم الحالمين المتمرّسين.">
+            Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">🕐</span>
+            <h4 class="font-bold text-white" data-en="3. The Clock / Text Check" data-ar="٣. فحص الساعة / النص">3. The Clock / Text Check</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Look at a clock or a piece of text. Read it carefully. Look away for a few seconds. Look back and read it again. In dreams, the numbers or words will have changed — often completely. Digital clocks are especially unreliable in dreams."
+             data-ar="انظر إلى ساعة أو قطعة نص. اقرأها بعناية. انظر بعيدًا لثوانٍ. ثم عُد واقرأها مرة أخرى. في الأحلام تتغيّر الأرقام أو الكلمات — غالبًا بالكامل. الساعات الرقمية غير موثوقة بشكل خاص في الأحلام.">
+            Look at a clock or a piece of text. Read it carefully. Look away for a few seconds. Look back and read it again. In dreams, the numbers or words will have changed — often completely. Digital clocks are especially unreliable in dreams.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">☝️</span>
+            <h4 class="font-bold text-white" data-en="4. Finger Through Palm" data-ar="٤. الإصبع عبر راحة اليد">4. Finger Through Palm</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Push the index finger of one hand into the palm of the other. In waking life, it stops at the skin. In a dream, the finger often sinks through the hand like soft clay — sometimes all the way out the other side."
+             data-ar="اضغط إصبع السبابة من إحدى يديك في راحة اليد الأخرى. في اليقظة يتوقف عند الجلد. أما في الحلم فيغوص الإصبع عبر اليد مثل طين لين — وأحيانًا يخرج من الجهة الأخرى بالكامل.">
+            Push the index finger of one hand into the palm of the other. In waking life, it stops at the skin. In a dream, the finger often sinks through the hand like soft clay — sometimes all the way out the other side.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">💡</span>
+            <h4 class="font-bold text-white" data-en="5. The Light Switch" data-ar="٥. مفتاح الإضاءة">5. The Light Switch</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Flip a light switch. In dreams, lights misbehave: they dim instead of switching, change colour, flicker strangely, or do nothing at all. If you can find a switch, this is a quick and reliable test."
+             data-ar="جرّب مفتاح الإضاءة. في الأحلام تسلك الإضاءة سلوكًا غريبًا: تخفت بدلًا من أن تُطفأ، أو تتغيّر ألوانها، أو ترتجف بشكل غريب، أو لا تفعل شيئًا على الإطلاق. إن وجدت مفتاحًا، فهذا اختبار سريع وموثوق.">
+            Flip a light switch. In dreams, lights misbehave: they dim instead of switching, change colour, flicker strangely, or do nothing at all. If you can find a switch, this is a quick and reliable test.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">🪂</span>
+            <h4 class="font-bold text-white" data-en="6. The Gravity Test" data-ar="٦. فحص الجاذبية">6. The Gravity Test</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Jump up and expect to float, or push a finger against a wall and expect it to give way. In dreams, gravity is a suggestion, not a law. If you keep floating a fraction longer than you should, or your hand passes into the wall, you're dreaming."
+             data-ar="اقفز وتوقّع أن تطفو، أو اضغط إصبعك على جدار وتوقّع أن يخترقه. في الأحلام، الجاذبية اقتراح لا قانون. إن استمررت في الطفو لجزء من الثانية أكثر مما ينبغي، أو دخلت يدك في الجدار، فأنت تحلم.">
+            Jump up and expect to float, or push a finger against a wall and expect it to give way. In dreams, gravity is a suggestion, not a law. If you keep floating a fraction longer than you should, or your hand passes into the wall, you're dreaming.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:col-span-2 lg:col-span-3">
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-2xl">🔊</span>
+            <h4 class="font-bold text-white" data-en="7. The Sound Check" data-ar="٧. فحص الصوت">7. The Sound Check</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Clap your hands, snap your fingers, or hum. In dreams, sound is often muffled, oddly pitched, or missing entirely. Background noise that should be there — traffic, wind, a running fridge — is usually absent. If the world is too quiet, you may be dreaming."
+             data-ar="صفّق بيديك، أو فرقع أصابعك، أو دندن. في الأحلام غالبًا ما يكون الصوت مكتومًا، أو بدرجة نغمة غريبة، أو غائبًا تمامًا. الضجيج الخلفي الذي يُفترض وجوده — السيارات، الريح، طنين الثلاجة — غائب عادةً. إن كان العالم هادئًا أكثر من اللازم، فقد تكون تحلم.">
+            Clap your hands, snap your fingers, or hum. In dreams, sound is often muffled, oddly pitched, or missing entirely. Background noise that should be there — traffic, wind, a running fridge — is usually absent. If the world is too quiet, you may be dreaming.
+          </p>
+        </div>
+      </div>
+
+      <!-- The habit protocol -->
+      <h3 class="mb-6 mt-14 text-2xl font-bold text-white sm:text-3xl">
+        <span data-en="The habit protocol (how to actually build it)" data-ar="بروتوكول العادة (كيف تبنيها فعليًا)">The habit protocol (how to actually build it)</span>
+      </h3>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">1</span>
+            <h4 class="font-bold text-white" data-en="Do 10–15 per day" data-ar="افعلها ١٠ إلى ١٥ مرة يوميًا">Do 10–15 per day</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Spread them throughout the day: morning, mid-morning, lunch, afternoon, evening, before bed. The number matters less than the consistency — but 10–15 is the sweet spot that most successfully carries the habit into dreams."
+             data-ar="وزّعها على مدار اليوم: الصباح، منتصف الصباح، الغداء، بعد الظهر، المساء، قبل النوم. العدد أقل أهمية من الانتظام — لكن ١٠ إلى ١٥ هو النطاق الأمثل الذي ينقل العادة إلى الحلم بنجاح.">
+            Spread them throughout the day: morning, mid-morning, lunch, afternoon, evening, before bed. The number matters less than the consistency — but 10–15 is the sweet spot that most successfully carries the habit into dreams.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">2</span>
+            <h4 class="font-bold text-white" data-en="Do them at dream-sign moments" data-ar="افعلها في لحظات علامات الحلم">Do them at dream-sign moments</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Whenever something odd or dreamlike happens — a strange sound, a familiar person in an unfamiliar place, an emotion that doesn't fit — check. Those are the moments that also trigger lucidity inside dreams."
+             data-ar="كلما حدث شيء غريب أو يشبه الحلم — صوت غريب، شخص مألوف في مكان غير مألوف، إحساس لا يتناسب مع الموقف — افحص. تلك هي اللحظات التي تُطلق الوضوح داخل الحلم أيضًا.">
+            Whenever something odd or dreamlike happens — a strange sound, a familiar person in an unfamiliar place, an emotion that doesn't fit — check. Those are the moments that also trigger lucidity inside dreams.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">3</span>
+            <h4 class="font-bold text-white" data-en="Really mean it" data-ar="اقصدها بصدق">Really mean it</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="The single biggest mistake is doing the check mechanically, on autopilot. Pause. Actually wonder. Actually look. If you treat it as a ritual, your dreaming mind will treat it as a ritual too, and it will not trigger anything."
+             data-ar="أكبر خطأ هو أداء الفحص بشكل آلي، بلا وعي. توقّف. تساءل فعليًا. انظر فعليًا. إن تعاملت معه كطقس شكلي، فسيتعامل عقلك الحالم معه كطقس شكلي أيضًا، ولن يُطلق شيئًا.">
+            The single biggest mistake is doing the check mechanically, on autopilot. Pause. Actually wonder. Actually look. If you treat it as a ritual, your dreaming mind will treat it as a ritual too, and it will not trigger anything.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">4</span>
+            <h4 class="font-bold text-white" data-en="Vary your checks" data-ar="نوّع في الفحوص">Vary your checks</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Don't only look at your hands. Rotate through the list — hand check, nose pinch, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams."
+             data-ar="لا تقتصر على النظر إلى يديك. تنقّل بين القائمة — فحص اليدين، قرص الأنف، فحص الساعة، الإصبع عبر راحة اليد. التنويع يُبقي الممارسة نشطة ذهنيًا ويغطّي حالات فشل أكثر في الحلم.">
+            Don't only look at your hands. Rotate through the list — hand check, nose pinch, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">5</span>
+            <h4 class="font-bold text-white" data-en="Keep going for 2–4 weeks" data-ar="واصل لمدة ٢ إلى ٤ أسابيع">Keep going for 2–4 weeks</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Reality checks do not work overnight. The reflex needs repetition to become automatic. Most beginners see their first reality-check-triggered lucid dream after 2–4 weeks of consistent practice. Do not quit before then."
+             data-ar="فحوص الواقع لا تعمل بين ليلة وضحاها. المنعكس يحتاج تكرارًا حتى يصبح تلقائيًا. معظم المبتدئين يرون أول حلم واضح مُطلَق بفحص الواقع بعد ٢ إلى ٤ أسابيع من الممارسة المنتظمة. لا تتوقف قبل ذلك.">
+            Reality checks do not work overnight. The reflex needs repetition to become automatic. Most beginners see their first reality-check-triggered lucid dream after 2–4 weeks of consistent practice. Do not quit before then.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
+          <div class="mb-2 flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/15 text-sm font-black text-fuchsia-300">6</span>
+            <h4 class="font-bold text-white" data-en="Pair with critical reflection" data-ar="اقرنها بالتأمل النقدي">Pair with critical reflection</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Before the physical test, ask yourself: “Could I be dreaming right now? How would I know?” Look for evidence in your surroundings. The reflection is the real practice — the physical check just confirms it."
+             data-ar="قبل الفحص الجسدي، اسأل نفسك: «هل يمكن أن أكون أحلم الآن؟ كيف أعرف؟» ابحث عن أدلة في محيطك. التأمل هو الممارسة الحقيقية — والفحص الجسدي مجرد تأكيد لها.">
+            Before the physical test, ask yourself: “Could I be dreaming right now? How would I know?” Look for evidence in your surroundings. The reflection is the real practice — the physical check just confirms it.
+          </p>
+        </div>
+      </div>
+
+      <!-- Critical reflection callout -->
+      <div class="mt-10 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-6 sm:p-8">
+        <div class="mb-3 flex items-center gap-3">
+          <span class="text-3xl">🧠</span>
+          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+            <span data-en="Critical reflection — the deeper half of the practice" data-ar="التأمل النقدي — النصف الأعمق من الممارسة">Critical reflection — the deeper half of the practice</span>
+          </h3>
+        </div>
+        <p class="mb-5 text-sm leading-relaxed text-indigo-100/85 sm:text-base"
+           data-en="The physical check is just a test. The real skill is the pause that comes before it — the moment where you genuinely question the nature of your reality. If you do the physical check without the reflection, you are building a gesture. If you do both, you are building a mindset, and it is that mindset that will surface in your dreams."
+           data-ar="الفحص الجسدي مجرد اختبار. المهارة الحقيقية هي التوقف الذي يأتي قبله — اللحظة التي تشكّ فيها بصدق في طبيعة واقعك. إن أدّيت الفحص الجسدي دون التأمل، فأنت تبني إشارة شكلية. أما إن أدّيت الاثنين، فأنت تبني عقلية، وهذه العقلية هي ما سيطهر في أحلامك.">
+          The physical check is just a test. The real skill is the pause that comes before it — the moment where you genuinely question the nature of your reality. If you do the physical check without the reflection, you are building a gesture. If you do both, you are building a mindset, and it is that mindset that will surface in your dreams.
+        </p>
+        <ul class="space-y-3 text-sm leading-relaxed text-indigo-100/85 sm:text-base">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-fuchsia-400"></span><span data-en="Ask the question and wait one second for an answer. Don't rush it." data-ar="اطرح السؤال وانتظر ثانية للإجابة. لا تستعجل.">Ask the question and wait one second for an answer. Don't rush it.</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-fuchsia-400"></span><span data-en="Look around: does anything look wrong? Is the lighting odd? Are the people familiar?" data-ar="انظر حولك: هل يبدو أي شيء غريبًا؟ هل الإضاءة غريبة؟ هل الأشخاص مألوفون؟">Look around: does anything look wrong? Is the lighting odd? Are the people familiar?</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-fuchsia-400"></span><span data-en="Try to recall how you got here. In dreams, the chain of events leading to “now” is usually missing or broken." data-ar="حاول أن تتذكّر كيف وصلت إلى هنا. في الأحلام، غالبًا ما يكون تسلسل الأحداث المؤدي إلى «الآن» مفقودًا أو مكسورًا.">Try to recall how you got here. In dreams, the chain of events leading to “now” is usually missing or broken.</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-fuchsia-400"></span><span data-en="Then do the physical check. Trust the result, whatever it is." data-ar="ثم أدِّ الفحص الجسدي. ثق بالنتيجة، أيًّا كانت.">Then do the physical check. Trust the result, whatever it is.</span></li>
+        </ul>
+      </div>
+
+      <!-- Common mistakes -->
+      <h3 class="mb-5 mt-14 text-2xl font-bold text-white sm:text-3xl">
+        <span data-en="Common mistakes that kill the habit" data-ar="أخطاء شائعة تقتل العادة">Common mistakes that kill the habit</span>
+      </h3>
+      <div class="rounded-2xl border border-rose-400/20 bg-rose-500/5 p-6 sm:p-7">
+        <ul class="grid gap-3 text-sm leading-relaxed text-rose-50/85 sm:grid-cols-2 sm:text-base">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Doing them on autopilot — a gesture without the question" data-ar="أداؤها بلا وعي — إشارة بلا سؤال">Doing them on autopilot — a gesture without the question</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Only ever doing one type of check" data-ar="الاقتصار على نوع واحد فقط من الفحوص">Only ever doing one type of check</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Dismissing the result (“that's just because I'm tired”)" data-ar="تجاهل النتيجة («هذا مجرد لأنني متعب»)" data-ar-literal="">Dismissing the result (“that's just because I'm tired”)</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Doing them at the same time every day — too predictable" data-ar="أداؤها في الوقت نفسه كل يوم — متوقّع أكثر من اللازم">Doing them at the same time every day — too predictable</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Quitting after a week because nothing happened" data-ar="التوقف بعد أسبوع لأن شيئًا لم يحدث">Quitting after a week because nothing happened</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Skipping them when you're busy or stressed — those are the days they matter most" data-ar="تخطّيها عندما تكون مشغولًا أو متوترًا — تلك هي الأيام التي تكون فيها الأهم">Skipping them when you're busy or stressed — those are the days they matter most</span></li>
+        </ul>
+      </div>
+
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
+        <h3 class="mb-3 text-lg font-bold text-white sm:text-xl"
+            data-en="Realistic expectations" data-ar="توقّعات واقعية">
+          Realistic expectations
+        </h3>
+        <p class="text-sm leading-relaxed text-indigo-100/80 sm:text-base"
+           data-en="Week 1: you feel silly and nothing happens. Week 2: the habit is easier but still nothing. Week 3: you start noticing how often you never questioned reality before. Week 4: you pause in a dream, ask the question, look at your hands — and they're wrong. That's the moment the habit pays off. It is also the moment most people quit at week 2. Don't."
+           data-ar="الأسبوع الأول: تشعر بالغرابة ولا يحدث شيء. الأسبوع الثاني: أصبحت العادة أسهل لكن لا شيء بعد. الأسبوع الثالث: تبدأ في ملاحظة كم مرة لم تشكّ في واقعك من قبل. الأسبوع الرابع: تتوقف في الحلم، تطرح السؤال، تنظر إلى يديك — فتكون خاطئة. تلك هي لحظة المكافأة. وهي أيضًا اللحظة التي يتوقف فيها معظم الناس في الأسبوع الثاني. لا تفعل.">
+          Week 1: you feel silly and nothing happens. Week 2: the habit is easier but still nothing. Week 3: you start noticing how often you never questioned reality before. Week 4: you pause in a dream, ask the question, look at your hands — and they're wrong. That's the moment the habit pays off. It is also the moment most people quit at week 2. Don't.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SECTION 04 — PERSISTENT REALITIES ======================= -->
+  <section id="realities" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+    <div class="reveal">
+      <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
+            data-en="Section 04" data-ar="القسم ٠٤">Section 04</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Persistent Realities (PRs)" data-ar="الواقع المستمر (PRs)">Persistent Realities (PRs)</span>
       </h2>
@@ -456,11 +687,11 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 04 — ADVANCED CONTROL & EFFORT PARADOX ======================= -->
+  <!-- ======================= SECTION 05 — ADVANCED CONTROL & EFFORT PARADOX ======================= -->
   <section id="control" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
-            data-en="Section 04" data-ar="القسم ٠٤">Section 04</span>
+            data-en="Section 05" data-ar="القسم ٠٥">Section 05</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Advanced Control &amp; “The Effort Paradox”" data-ar="التحكم المتقدّم و«مفارقة الجهد»">Advanced Control &amp; “The Effort Paradox”</span>
       </h2>
@@ -624,11 +855,11 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 05 — STAYING LONGER IN THE DREAM ======================= -->
+  <!-- ======================= SECTION 06 — STAYING LONGER IN THE DREAM ======================= -->
   <section id="longer" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
-            data-en="Section 05" data-ar="القسم ٠٥">Section 05</span>
+            data-en="Section 06" data-ar="القسم ٠٦">Section 06</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="How to Stay Longer in the Dream" data-ar="كيف تبقى مدة أطول في الحلم">How to Stay Longer in the Dream</span>
       </h2>
@@ -864,48 +1095,26 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 06 — METHODS ======================= -->
+  <!-- ======================= SECTION 07 — METHODS ======================= -->
   <section id="methods" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
-            data-en="Section 06" data-ar="القسم ٠٦">Section 06</span>
+            data-en="Section 07" data-ar="القسم ٠٧">Section 07</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="New &amp; Cool Ways to Lucid Dream" data-ar="طرق جديدة وممتعة للحلم الواضح">New &amp; Cool Ways to Lucid Dream</span>
       </h2>
       <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
-         data-en="You do not need special talent or equipment. These are the methods that actually work for beginners, ranked roughly by how much they pay off for how little they cost."
-         data-ar="لا تحتاج موهبة خاصة ولا أدوات. هذه هي الطرق التي تعمل فعلًا مع المبتدئين، مرتّبة تقريبًا بحسب مردودها مقابل الجهد المطلوب.">
-        You do not need special talent or equipment. These are the methods that actually work for beginners, ranked roughly by how much they pay off for how little they cost.
+         data-en="Reality checks (Section 03) are the foundation — start there first. The methods below are the ones that pair best with a strong reality-check habit."
+         data-ar="فحوص الواقع (القسم ٠٣) هي الأساس — ابدأ من هناك أولًا. الطرق التالية هي التي تتكامل بشكل أفضل مع عادة فحص الواقع القوية.">
+        Reality checks (Section 03) are the foundation — start there first. The methods below are the ones that pair best with a strong reality-check habit.
       </p>
-
-      <div class="mb-5 rounded-3xl border border-white/10 card-glass p-6 sm:p-8">
-        <div class="mb-4 flex items-center gap-3">
-          <span class="text-3xl">🖐️</span>
-          <h3 class="text-xl font-bold text-white sm:text-2xl">
-            <span data-en="1. The Reality Check habit" data-ar="١. عادة فحص الواقع">1. The Reality Check habit</span>
-          </h3>
-        </div>
-        <p class="mb-5 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
-           data-en="A reality check is not a trick you perform once — it is a habit you build so that your dreaming mind performs it automatically. Several times a day, stop and genuinely ask: “Am I dreaming?” Then actually test it."
-           data-ar="فحص الواقع ليس حيلة تفعلها مرة واحدة — بل عادة تبنيها حتى يؤديها عقلك الحالم تلقائيًا. توقّف عدة مرات في اليوم واسأل بصدق: «هل أحلم؟» ثم اختبر الأمر فعليًا.">
-          A reality check is not a trick you perform once — it is a habit you build so that your dreaming mind performs it automatically. Several times a day, stop and genuinely ask: “Am I dreaming?” Then actually test it.
-        </p>
-        <ul class="grid gap-3 text-sm leading-relaxed text-indigo-100/80 sm:grid-cols-2 sm:text-base">
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">👋</span><span><span class="font-semibold text-white" data-en="Look at your hands. " data-ar="انظر إلى يديك. ">Look at your hands. </span><span data-en="In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or shifting when you look away and back." data-ar="في الأحلام، الأصابع غالبًا خاطئة — أكثر من اللازم، أو أقل، أو ذائبة، أو مشوّشة، أو تتغيّر حين تنظر بعيدًا ثم تعود.">In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or shifting when you look away and back.</span></span></li>
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">🕐</span><span><span class="font-semibold text-white" data-en="Read text or a clock twice. " data-ar="اقرأ نصًا أو انظر إلى ساعة مرتين. ">Read text or a clock twice. </span><span data-en="Look away, then look back. In dreams, numbers and words change when you stop watching them." data-ar="انظر بعيدًا ثم عد إليها. في الأحلام، تتغيّر الأرقام والكلمات حين تتوقف عن مراقبتها.">Look away, then look back. In dreams, numbers and words change when you stop watching them.</span></span></li>
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">👃</span><span><span class="font-semibold text-white" data-en="Pinch your nose and breathe. " data-ar="اقرص أنفك وحاول التنفّس. ">Pinch your nose and breathe. </span><span data-en="The classic test: pinch your nostrils shut and try to inhale. If air still moves, you are dreaming." data-ar="الاختبار الكلاسيكي: أغمض فتحتي أنفك بإصبعيك وحاول الشهيق. إن مرّ الهواء، فأنت تحلم.">The classic test: pinch your nostrils shut and try to inhale. If air still moves, you are dreaming.</span></span></li>
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">☝️</span><span><span class="font-semibold text-white" data-en="Push a finger into your palm. " data-ar="اضغط إصبعك في راحة يدك. ">Push a finger into your palm. </span><span data-en="In dreams the finger often sinks through the hand like soft clay." data-ar="في الأحلام، غالبًا ما يغوص الإصبع عبر اليد مثل طين لين.">In dreams the finger often sinks through the hand like soft clay.</span></span></li>
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">💡</span><span><span class="font-semibold text-white" data-en="Flip a light switch. " data-ar="جرّب مفتاح الإضاءة. ">Flip a light switch. </span><span data-en="Dream lights misbehave: they dim instead of switching, change colour, or do nothing at all." data-ar="الإضاءة في الحلم تسلك سلوكًا غريبًا: تخفت بدلًا من أن تُطفأ، أو تتغيّر ألوانها، أو لا تفعل شيئًا على الإطلاق.">Dream lights misbehave: they dim instead of switching, change colour, or do nothing at all.</span></span></li>
-          <li class="flex gap-3 rounded-xl bg-white/5 p-3"><span class="shrink-0">🔁</span><span><span class="font-semibold text-white" data-en="Do 5–10 a day. " data-ar="افعلها ٥ إلى ١٠ مرات يوميًا. ">Do 5–10 a day. </span><span data-en="Especially at dream-sign moments. The habit is what carries into the dream — the check itself is just the trigger." data-ar="خصوصًا في لحظات علامات الحلم. العادة هي ما ينتقل معك إلى الحلم — والفحص نفسه مجرد محفّز.">Especially at dream-sign moments. The habit is what carries into the dream — the check itself is just the trigger.</span></span></li>
-        </ul>
-      </div>
 
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="rounded-3xl border border-white/10 card-glass p-6 sm:p-7">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-3xl">⏰</span>
             <h3 class="text-lg font-bold text-white sm:text-xl">
-              <span data-en="2. Wake Back to Bed (WBTB)" data-ar="٢. الاستيقاظ والعودة إلى النوم (WBTB)">2. Wake Back to Bed (WBTB)</span>
+              <span data-en="1. Wake Back to Bed (WBTB)" data-ar="١. الاستيقاظ والعودة إلى النوم (WBTB)">1. Wake Back to Bed (WBTB)</span>
             </h3>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -919,7 +1128,7 @@
           <div class="mb-3 flex items-center gap-3">
             <span class="text-3xl">🌊</span>
             <h3 class="text-lg font-bold text-white sm:text-xl">
-              <span data-en="3. WILD (Wake-Initiated)" data-ar="٣. WILD — البدء من اليقظة">3. WILD (Wake-Initiated)</span>
+              <span data-en="2. WILD (Wake-Initiated)" data-ar="٢. WILD — البدء من اليقظة">2. WILD (Wake-Initiated)</span>
             </h3>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -933,7 +1142,7 @@
           <div class="mb-3 flex items-center gap-3">
             <span class="text-3xl">🧩</span>
             <h3 class="text-lg font-bold text-white sm:text-xl">
-              <span data-en="4. MILD (Mnemonic Induction)" data-ar="٤. MILD — الحث بالاستذكار">4. MILD (Mnemonic Induction)</span>
+              <span data-en="3. MILD (Mnemonic Induction)" data-ar="٣. MILD — الحث بالاستذكار">3. MILD (Mnemonic Induction)</span>
             </h3>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -947,7 +1156,7 @@
           <div class="mb-3 flex items-center gap-3">
             <span class="text-3xl">🎨</span>
             <h3 class="text-lg font-bold text-white sm:text-xl">
-              <span data-en="5. Visualisation, naps &amp; alarms" data-ar="٥. التخيّل، القيلولة، والمنبّهات">5. Visualisation, naps &amp; alarms</span>
+              <span data-en="4. Visualisation, naps &amp; alarms" data-ar="٤. التخيّل، القيلولة، والمنبّهات">4. Visualisation, naps &amp; alarms</span>
             </h3>
           </div>
           <ul class="space-y-3 text-sm leading-relaxed text-indigo-200/70">
@@ -960,11 +1169,11 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 07 — WHAT NOT TO DO ======================= -->
+  <!-- ======================= SECTION 08 — WHAT NOT TO DO ======================= -->
   <section id="avoid" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-rose-300/80 sm:text-xs"
-            data-en="Section 07" data-ar="القسم ٠٧">Section 07</span>
+            data-en="Section 08" data-ar="القسم ٠٨">Section 08</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="What NOT to Do" data-ar="ما يجب تجنّبه">What NOT to Do</span>
       </h2>
@@ -1027,11 +1236,11 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 08 — RESOURCES ======================= -->
+  <!-- ======================= SECTION 09 — RESOURCES ======================= -->
   <section id="resources" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
-            data-en="Section 08" data-ar="القسم ٠٨">Section 08</span>
+            data-en="Section 09" data-ar="القسم ٠٩">Section 09</span>
       <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Resources &amp; Further Reading" data-ar="المصادر وقراءات إضافية">Resources &amp; Further Reading</span>
       </h2>
@@ -1133,8 +1342,8 @@
   };
 
   var META_DESCRIPTIONS = {
-    en: 'A practical, beginner-friendly guide to lucid dreaming: dream recall, persistent realities, advanced control, the Effort Paradox, staying longer in dreams, and the best resources to learn from.',
-    ar: 'دليل عملي مناسب للمبتدئين عن الحلم الواضح: استرجاع الأحلام، الواقع المستمر، التحكم المتقدّم، مفارقة الجهد، البقاء مدة أطول في الحلم، وأفضل المصادر للتعلّم منها.'
+    en: 'A practical, beginner-friendly guide to lucid dreaming: dream recall, reality checks, persistent realities, advanced control, the Effort Paradox, staying longer in dreams, and the best resources to learn from.',
+    ar: 'دليل عملي مناسب للمبتدئين عن الحلم الواضح: استرجاع الأحلام، فحوص الواقع، الواقع المستمر، التحكم المتقدّم، مفارقة الجهد، البقاء مدة أطول في الحلم، وأفضل المصادر للتعلّم منها.'
   };
 
   function applyLanguage(lang) {
