@@ -77,6 +77,27 @@
   .lang-btn:not(.active):hover { color: #fff; background: rgba(255,255,255,.08); }
 
   .glow-text { text-shadow: 0 0 28px rgba(168,85,247,.45), 0 0 70px rgba(99,102,241,.25); }
+
+  /* Ensure gradient text has enough room — critical for Arabic descenders */
+  .glow-text {
+    padding-top: 0.08em;
+    padding-bottom: 0.18em;
+  }
+
+  /* Arabic mode: give the big headline more vertical space so
+     letters like ح/م/و/ج don't get clipped by bg-clip-text */
+  html[lang="ar"] h1.glow-text {
+    line-height: 1.5;
+    padding-top: 0.15em;
+    padding-bottom: 0.4em;
+  }
+
+  /* Also protect Arabic section headings (h2 / h3) that use gradient text */
+  html[lang="ar"] h2, html[lang="ar"] h3 {
+    line-height: 1.55;
+    padding-bottom: 0.15em;
+  }
+
   .card-glass { background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.02)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   ::selection { background: rgba(168,85,247,.4); color: #fff; }
   ::-webkit-scrollbar { width: 10px; }
@@ -133,7 +154,7 @@
       <span data-en="A practical guide" data-ar="دليل عملي">A practical guide</span>
     </span>
 
-    <h1 class="glow-text bg-gradient-to-br from-white via-fuchsia-200 to-indigo-300 bg-clip-text text-5xl font-black leading-[1.05] text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
+    <h1 class="glow-text bg-gradient-to-br from-white via-fuchsia-200 to-indigo-300 bg-clip-text text-5xl font-black text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
       <span data-en="Lucid Dreaming" data-ar="الحلم الواضح">Lucid Dreaming</span>
     </h1>
 
@@ -1021,7 +1042,6 @@
       </p>
 
       <div class="grid gap-5 lg:grid-cols-3">
-        <!-- Reddit -->
         <div class="flex flex-col rounded-3xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/12 to-transparent p-6 sm:p-7">
           <div class="mb-3 text-3xl">💬</div>
           <h3 class="mb-3 text-lg font-bold text-white">r/LucidDreaming</h3>
@@ -1037,7 +1057,6 @@
           </a>
         </div>
 
-        <!-- Book -->
         <div class="flex flex-col rounded-3xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/12 to-transparent p-6 sm:p-7">
           <div class="mb-3 text-3xl">📖</div>
           <h3 class="mb-3 text-lg font-bold text-white">
@@ -1050,7 +1069,6 @@
           </p>
         </div>
 
-        <!-- Dream Views -->
         <div class="flex flex-col rounded-3xl border border-purple-400/25 bg-gradient-to-b from-purple-500/12 to-transparent p-6 sm:p-7">
           <div class="mb-3 text-3xl">🗂️</div>
           <h3 class="mb-3 text-lg font-bold text-white">Dream Views</h3>
@@ -1067,7 +1085,6 @@
         </div>
       </div>
 
-      <!-- Tips -->
       <div class="mt-8 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
         <h3 class="mb-4 text-lg font-bold text-white"
             data-en="How to get the most out of any dream community" data-ar="كيف تستفيد أقصى استفادة من أي مجتمع للحالمين">
