@@ -2,10 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Lucid Dreaming — A Practical Guide to Waking Up Inside Your Dreams</title>
 <meta name="description" content="A practical, beginner-friendly guide to lucid dreaming: dream recall, reality checks, persistent realities, dream incubation, fun things to do, staying extra long in dreams, and continuing dreams after they end." />
 <meta name="theme-color" content="#07040f" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
 
 <script>document.documentElement.classList.add('js');</script>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -41,11 +44,44 @@
 </script>
 
 <style>
-  html { scroll-behavior: smooth; }
-  body { background-color: #07040f; color: #e7e2ff; font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  /* ---------- Base & responsiveness ---------- */
+  * { -webkit-tap-highlight-color: transparent; }
+
+  html {
+    scroll-behavior: smooth;
+    /* Account for fixed header on all screen sizes */
+    scroll-padding-top: 96px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (min-width: 640px) { html { scroll-padding-top: 88px; } }
+  @media (min-width: 1024px) { html { scroll-padding-top: 84px; } }
+
+  body {
+    background-color: #07040f;
+    color: #e7e2ff;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* iOS safe-area insets */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
   html[lang="ar"] body { font-family: 'Cairo', 'Tajawal', sans-serif; line-height: 1.9; }
   html[lang="ar"] .tracking-\[0\.2em\] { letter-spacing: 0 !important; }
 
+  /* Prevent any child element from causing horizontal overflow */
+  img, video, svg, canvas { max-width: 100%; height: auto; }
+  pre, code { overflow-x: auto; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+
+  /* Long words / Arabic ligatures should not overflow their container */
+  h1, h2, h3, h4, p, li, span { overflow-wrap: anywhere; word-break: normal; }
+
+  /* ---------- Starfield ---------- */
   .starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-repeat: repeat; }
   #stars-a {
     background-image:
@@ -71,11 +107,45 @@
   html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
   html.js .reveal.is-visible { opacity: 1; transform: none; }
 
-  .lang-btn { transition: background .25s ease, color .25s ease, box-shadow .25s ease; white-space: nowrap; }
+  /* ---------- Language toggle (thumb-friendly) ---------- */
+  .lang-btn {
+    transition: background .25s ease, color .25s ease, box-shadow .25s ease;
+    white-space: nowrap;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
   .lang-btn.active { background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; box-shadow: 0 0 20px rgba(168,85,247,.55); }
   .lang-btn:not(.active) { color: #c7d2fe; }
   .lang-btn:not(.active):hover { color: #fff; background: rgba(255,255,255,.08); }
 
+  /* Mobile nav pills — comfortable tap targets */
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: .5rem .95rem;
+    border-radius: 9999px;
+    font-size: .78rem;
+    font-weight: 600;
+    color: #c7d2fe;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    min-height: 36px;
+    scroll-snap-align: start;
+  }
+  .nav-pill:hover, .nav-pill:active { background: rgba(168,85,247,.16); color: #fff; border-color: rgba(168,85,247,.35); }
+  .nav-scroll {
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+
+  /* ---------- Gradient text ---------- */
   .glow-text { text-shadow: 0 0 28px rgba(168,85,247,.45), 0 0 70px rgba(99,102,241,.25); }
   .glow-text { padding-top: 0.08em; padding-bottom: 0.18em; }
   html[lang="ar"] h1.glow-text { line-height: 1.5; padding-top: 0.15em; padding-bottom: 0.4em; }
@@ -87,24 +157,43 @@
   .best-badge {
     display: inline-flex; align-items: center; gap: .3rem;
     border-radius: 9999px;
-    padding: .2rem .7rem;
-    font-size: .68rem;
+    padding: .25rem .7rem;
+    font-size: .66rem;
     font-weight: 800;
     letter-spacing: .05em;
     text-transform: uppercase;
     background: linear-gradient(135deg, #10b981, #059669);
     color: #fff;
     box-shadow: 0 0 14px -2px rgba(16,185,129,.8);
+    white-space: nowrap;
   }
   .best-badge-conditional {
     background: linear-gradient(135deg, #f59e0b, #d97706);
     box-shadow: 0 0 14px -2px rgba(245,158,11,.8);
   }
 
+  /* ---------- Fluid typography helpers ---------- */
+  /* Slightly larger tap-friendly body text on small screens, and never too wide on laptops */
+  @media (max-width: 380px) {
+    /* Very small phones — tighten the hero and button rows */
+    .hero-cta { padding: .7rem 1.25rem !important; font-size: .82rem !important; }
+  }
+
+  /* ---------- Prevent layout shift on rotate / iPad ---------- */
+  @media (max-width: 1024px) {
+    .hero-min-height { min-height: calc(100vh - 4rem); }
+    @supports (min-height: 100dvh) {
+      .hero-min-height { min-height: calc(100dvh - 4rem); }
+    }
+  }
+
+  /* ---------- Scrollbar ---------- */
   ::selection { background: rgba(168,85,247,.4); color: #fff; }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #07040f; }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(#7c3aed, #4f46e5); border-radius: 999px; }
+  @media (pointer: fine) {
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #07040f; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(#7c3aed, #4f46e5); border-radius: 999px; }
+  }
 </style>
 </head>
 
@@ -120,94 +209,119 @@
 </div>
 
 <!-- ======================= NAVIGATION ======================= -->
-<header class="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#07040f]/75 backdrop-blur-xl">
-  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href="#top" class="flex shrink-0 items-center gap-2">
-      <span class="text-2xl animate-floaty">🌙</span>
-      <span class="text-base font-extrabold tracking-tight text-white sm:text-lg" data-en="Lucid Dreaming" data-ar="الحلم الواضح">Lucid Dreaming</span>
-    </a>
+<header class="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#07040f]/85 backdrop-blur-xl">
+  <div class="mx-auto max-w-6xl px-3 sm:px-6">
 
-    <div class="hidden items-center gap-3 text-[13px] font-medium text-indigo-200/70 xl:flex">
-      <a href="#what"      class="transition hover:text-white" data-en="What It Is"  data-ar="ما هو">What It Is</a>
-      <a href="#recall"    class="transition hover:text-white" data-en="Recall"      data-ar="الاسترجاع">Recall</a>
-      <a href="#checks"    class="transition hover:text-white" data-en="Checks"      data-ar="فحوص الواقع">Checks</a>
-      <a href="#realities" class="transition hover:text-white" data-en="Realities"   data-ar="الواقع المستمر">Realities</a>
-      <a href="#control"   class="transition hover:text-white" data-en="Control"     data-ar="التحكم">Control</a>
-      <a href="#longer"    class="transition hover:text-white" data-en="Stay Longer" data-ar="البقاء أطول">Stay Longer</a>
-      <a href="#incubate"  class="transition hover:text-white" data-en="Incubation"  data-ar="الاحتضان">Incubation</a>
-      <a href="#fun"       class="transition hover:text-white" data-en="Fun"         data-ar="التسلية">Fun</a>
-      <a href="#continue"  class="transition hover:text-white" data-en="Continue"    data-ar="الاستمرار">Continue</a>
-      <a href="#methods"   class="transition hover:text-white" data-en="Methods"     data-ar="الطرق">Methods</a>
-      <a href="#avoid"     class="transition hover:text-white" data-en="Avoid"       data-ar="تجنّب">Avoid</a>
-      <a href="#resources" class="transition hover:text-white" data-en="Resources"   data-ar="المصادر">Resources</a>
-    </div>
+    <!-- Top row: brand + language toggle -->
+    <div class="flex h-14 items-center justify-between gap-3 sm:h-16">
 
-    <div class="flex shrink-0 items-center">
-      <div class="flex items-center gap-1 rounded-full border border-fuchsia-400/25 bg-white/5 p-1 shadow-[0_0_25px_-8px_rgba(168,85,247,0.8)]">
-        <button id="btn-en" type="button" class="lang-btn rounded-full px-3 py-1.5 text-xs font-bold sm:px-4 sm:text-sm">English</button>
-        <button id="btn-ar" type="button" class="lang-btn rounded-full px-3 py-1.5 text-xs font-bold sm:px-4 sm:text-sm">العربية</button>
+      <a href="#top" class="flex min-w-0 shrink items-center gap-2">
+        <span class="shrink-0 text-xl sm:text-2xl animate-floaty">🌙</span>
+        <span class="truncate text-sm font-extrabold tracking-tight text-white sm:text-base lg:text-lg"
+              data-en="Lucid Dreaming" data-ar="الحلم الواضح">Lucid Dreaming</span>
+      </a>
+
+      <!-- Desktop full navigation (only shows on xl+) -->
+      <div class="hidden items-center gap-3 text-[13px] font-medium text-indigo-200/70 xl:flex">
+        <a href="#what"      class="transition hover:text-white" data-en="What It Is"  data-ar="ما هو">What It Is</a>
+        <a href="#recall"    class="transition hover:text-white" data-en="Recall"      data-ar="الاسترجاع">Recall</a>
+        <a href="#checks"    class="transition hover:text-white" data-en="Checks"      data-ar="فحوص الواقع">Checks</a>
+        <a href="#realities" class="transition hover:text-white" data-en="Realities"   data-ar="الواقع المستمر">Realities</a>
+        <a href="#control"   class="transition hover:text-white" data-en="Control"     data-ar="التحكم">Control</a>
+        <a href="#longer"    class="transition hover:text-white" data-en="Stay Longer" data-ar="البقاء أطول">Stay Longer</a>
+        <a href="#incubate"  class="transition hover:text-white" data-en="Incubation"  data-ar="الاحتضان">Incubation</a>
+        <a href="#fun"       class="transition hover:text-white" data-en="Fun"         data-ar="التسلية">Fun</a>
+        <a href="#continue"  class="transition hover:text-white" data-en="Continue"    data-ar="الاستمرار">Continue</a>
+        <a href="#methods"   class="transition hover:text-white" data-en="Methods"     data-ar="الطرق">Methods</a>
+        <a href="#avoid"     class="transition hover:text-white" data-en="Avoid"       data-ar="تجنّب">Avoid</a>
+        <a href="#resources" class="transition hover:text-white" data-en="Resources"   data-ar="المصادر">Resources</a>
+      </div>
+
+      <!-- Language toggle (thumb-friendly, always visible) -->
+      <div class="flex shrink-0 items-center">
+        <div class="flex items-center gap-1 rounded-full border border-fuchsia-400/25 bg-white/5 p-1 shadow-[0_0_25px_-8px_rgba(168,85,247,0.8)]">
+          <button id="btn-en" type="button" class="lang-btn rounded-full px-3 py-1.5 text-xs font-bold sm:px-4 sm:text-sm">English</button>
+          <button id="btn-ar" type="button" class="lang-btn rounded-full px-3 py-1.5 text-xs font-bold sm:px-4 sm:text-sm">العربية</button>
+        </div>
       </div>
     </div>
-  </nav>
+
+    <!-- Scrollable nav strip: visible on all screens below xl (phones, tablets, small laptops) -->
+    <nav class="nav-scroll -mx-3 flex gap-2 overflow-x-auto px-3 pb-2.5 xl:hidden" aria-label="Section navigation">
+      <a href="#what"      class="nav-pill" data-en="What It Is"  data-ar="ما هو">What It Is</a>
+      <a href="#recall"    class="nav-pill" data-en="Recall"      data-ar="الاسترجاع">Recall</a>
+      <a href="#checks"    class="nav-pill" data-en="Reality Checks" data-ar="فحوص الواقع">Reality Checks</a>
+      <a href="#realities" class="nav-pill" data-en="Realities"   data-ar="الواقع المستمر">Realities</a>
+      <a href="#control"   class="nav-pill" data-en="Control"     data-ar="التحكم">Control</a>
+      <a href="#longer"    class="nav-pill" data-en="Stay Longer" data-ar="البقاء أطول">Stay Longer</a>
+      <a href="#incubate"  class="nav-pill" data-en="Incubation"  data-ar="الاحتضان">Incubation</a>
+      <a href="#fun"       class="nav-pill" data-en="Fun"         data-ar="التسلية">Fun</a>
+      <a href="#continue"  class="nav-pill" data-en="Continue"    data-ar="الاستمرار">Continue</a>
+      <a href="#methods"   class="nav-pill" data-en="Methods"     data-ar="الطرق">Methods</a>
+      <a href="#avoid"     class="nav-pill" data-en="Avoid"       data-ar="تجنّب">Avoid</a>
+      <a href="#resources" class="nav-pill" data-en="Resources"   data-ar="المصادر">Resources</a>
+    </nav>
+
+  </div>
 </header>
 
-<main id="top" class="relative z-10">
+<main id="top" class="relative z-10 pt-24 sm:pt-28 xl:pt-16">
 
   <!-- ======================= HERO ======================= -->
-  <section class="mx-auto flex min-h-[92vh] max-w-5xl flex-col items-center justify-center px-4 pt-28 pb-16 text-center sm:px-6">
-    <span class="mb-6 inline-flex items-center gap-2 rounded-full border border-fuchsia-400/25 bg-white/5 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-fuchsia-200/90 uppercase sm:text-xs">
+  <section class="hero-min-height mx-auto flex max-w-5xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6 sm:py-16">
+    <span class="mb-5 inline-flex items-center gap-2 rounded-full border border-fuchsia-400/25 bg-white/5 px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.16em] text-fuchsia-200/90 uppercase sm:mb-6 sm:px-4 sm:text-xs">
       <span class="h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-pulse"></span>
       <span data-en="A practical guide" data-ar="دليل عملي">A practical guide</span>
     </span>
 
-    <h1 class="glow-text bg-gradient-to-br from-white via-fuchsia-200 to-indigo-300 bg-clip-text text-5xl font-black text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
+    <h1 class="glow-text bg-gradient-to-br from-white via-fuchsia-200 to-indigo-300 bg-clip-text text-4xl font-black text-transparent sm:text-6xl md:text-7xl lg:text-8xl">
       <span data-en="Lucid Dreaming" data-ar="الحلم الواضح">Lucid Dreaming</span>
     </h1>
 
-    <p class="mt-6 max-w-2xl text-xl font-semibold text-indigo-100 sm:text-2xl"
+    <p class="mt-5 max-w-2xl text-lg font-semibold text-indigo-100 sm:mt-6 sm:text-2xl"
        data-en="Wake up inside your own dreams." data-ar="استيقظ داخل أحلامك.">Wake up inside your own dreams.</p>
 
-    <p class="mt-5 max-w-2xl text-base leading-relaxed text-indigo-200/70 sm:text-lg"
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-indigo-200/70 sm:mt-5 sm:text-base md:text-lg"
        data-en="A complete, practical guide to becoming aware while you dream — remembering those dreams clearly, staying inside them longer, dreaming of the places you choose, and doing things you cannot do anywhere else."
        data-ar="دليل كامل وعملي لتصبح واعيًا أثناء حلمك — أن تتذكّر أحلامك بوضوح، وتبقى داخلها مدة أطول، وتحلم بالأماكن التي تختارها، وتفعل أشياء لا يمكنك فعلها في أي مكان آخر.">
       A complete, practical guide to becoming aware while you dream — remembering those dreams clearly, staying inside them longer, dreaming of the places you choose, and doing things you cannot do anywhere else.
     </p>
 
-    <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-      <a href="#what" class="rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-7 py-3 text-sm font-bold text-white shadow-lg shadow-fuchsia-900/40 transition hover:scale-[1.03] hover:shadow-fuchsia-700/50">
+    <div class="mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-10 sm:w-auto sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+      <a href="#what" class="hero-cta inline-flex items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-fuchsia-900/40 transition hover:scale-[1.03] hover:shadow-fuchsia-700/50 sm:px-7 sm:py-3">
         <span data-en="Start Reading" data-ar="ابدأ القراءة">Start Reading</span>
       </a>
-      <a href="#resources" class="rounded-full border border-white/15 bg-white/5 px-7 py-3 text-sm font-bold text-indigo-100 transition hover:border-fuchsia-400/40 hover:bg-white/10">
+      <a href="#resources" class="hero-cta inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-indigo-100 transition hover:border-fuchsia-400/40 hover:bg-white/10 sm:px-7 sm:py-3">
         <span data-en="Explore Resources" data-ar="استكشف المصادر">Explore Resources</span>
       </a>
     </div>
 
-    <div class="mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-      <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="12" data-ar="١٢">12</div>
-        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Core sections" data-ar="أقسام أساسية">Core sections</div>
+    <div class="mt-10 grid w-full max-w-3xl grid-cols-2 gap-2.5 sm:mt-14 sm:grid-cols-4 sm:gap-3">
+      <div class="rounded-2xl border border-white/8 card-glass px-2.5 py-3.5 sm:px-3 sm:py-4">
+        <div class="text-base font-black text-fuchsia-300 sm:text-xl" data-en="12" data-ar="١٢">12</div>
+        <div class="mt-1 text-[10px] font-medium text-indigo-200/60 sm:text-xs" data-en="Core sections" data-ar="أقسام أساسية">Core sections</div>
       </div>
-      <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="30+" data-ar="+٣٠">30+</div>
-        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Techniques" data-ar="تقنيات">Techniques</div>
+      <div class="rounded-2xl border border-white/8 card-glass px-2.5 py-3.5 sm:px-3 sm:py-4">
+        <div class="text-base font-black text-fuchsia-300 sm:text-xl" data-en="30+" data-ar="+٣٠">30+</div>
+        <div class="mt-1 text-[10px] font-medium text-indigo-200/60 sm:text-xs" data-en="Techniques" data-ar="تقنيات">Techniques</div>
       </div>
-      <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="2" data-ar="٢">2</div>
-        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Best reality checks" data-ar="أفضل فحوص الواقع">Best reality checks</div>
+      <div class="rounded-2xl border border-white/8 card-glass px-2.5 py-3.5 sm:px-3 sm:py-4">
+        <div class="text-base font-black text-fuchsia-300 sm:text-xl" data-en="2" data-ar="٢">2</div>
+        <div class="mt-1 text-[10px] font-medium text-indigo-200/60 sm:text-xs" data-en="Best reality checks" data-ar="أفضل فحوص الواقع">Best reality checks</div>
       </div>
-      <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="0$" data-ar="٠$">0$</div>
-        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Free forever" data-ar="مجاني دائمًا">Free forever</div>
+      <div class="rounded-2xl border border-white/8 card-glass px-2.5 py-3.5 sm:px-3 sm:py-4">
+        <div class="text-base font-black text-fuchsia-300 sm:text-xl" data-en="0$" data-ar="٠$">0$</div>
+        <div class="mt-1 text-[10px] font-medium text-indigo-200/60 sm:text-xs" data-en="Free forever" data-ar="مجاني دائمًا">Free forever</div>
       </div>
     </div>
   </section>
 
   <!-- ======================= SECTION 01 — WHAT IS LUCID DREAMING ======================= -->
-  <section id="what" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="what" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 01" data-ar="القسم ٠١">Section 01</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="What Is Lucid Dreaming?" data-ar="ما هو الحلم الواضح؟">What Is Lucid Dreaming?</span>
       </h2>
       <div class="space-y-5 text-base leading-relaxed text-indigo-100/80 sm:text-lg">
@@ -221,8 +335,8 @@
         </p>
       </div>
 
-      <div class="mt-10 grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl border border-white/8 card-glass p-6 transition hover:border-fuchsia-400/30">
+      <div class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6 transition hover:border-fuchsia-400/30">
           <div class="mb-3 text-2xl">👁️</div>
           <h3 class="mb-2 text-lg font-bold text-white" data-en="Awareness" data-ar="الوعي">Awareness</h3>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -231,7 +345,7 @@
             The realization itself. Most people have had it once or twice by accident, usually in the second right before waking up. The skill is learning to have it on purpose, early, and to stay calm when it happens.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6 transition hover:border-fuchsia-400/30">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6 transition hover:border-fuchsia-400/30">
           <div class="mb-3 text-2xl">✨</div>
           <h3 class="mb-2 text-lg font-bold text-white" data-en="Clarity" data-ar="الصفاء">Clarity</h3>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -240,7 +354,7 @@
             Once you know, the dream often sharpens. Colors get richer, textures become tactile, sounds become real. Many dreamers describe the lucid state as more vivid than waking life itself.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6 transition hover:border-fuchsia-400/30">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6 transition hover:border-fuchsia-400/30">
           <div class="mb-3 text-2xl">🎛️</div>
           <h3 class="mb-2 text-lg font-bold text-white" data-en="Control" data-ar="التحكم">Control</h3>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -249,7 +363,7 @@
             Control is a spectrum, not a switch. Beginners usually just walk around and observe. With practice you can fly, change the weather, summon people, or build an entire city block by block.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6 transition hover:border-fuchsia-400/30">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6 transition hover:border-fuchsia-400/30">
           <div class="mb-3 text-2xl">🛡️</div>
           <h3 class="mb-2 text-lg font-bold text-white" data-en="Safety" data-ar="السلامة">Safety</h3>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -260,28 +374,28 @@
         </div>
       </div>
 
-      <div class="mt-10 rounded-3xl border border-indigo-400/15 bg-indigo-500/5 p-6 sm:p-8">
-        <h3 class="mb-5 text-lg font-bold text-white sm:text-xl"
+      <div class="mt-8 rounded-3xl border border-indigo-400/15 bg-indigo-500/5 p-5 sm:mt-10 sm:p-8">
+        <h3 class="mb-5 text-base font-bold text-white sm:text-xl"
             data-en="The three ways a lucid dream begins" data-ar="الطرق الثلاث التي يبدأ بها الحلم الواضح">
           The three ways a lucid dream begins
         </h3>
         <ul class="space-y-4 text-sm leading-relaxed text-indigo-100/80 sm:text-base">
           <li class="flex flex-col gap-1 sm:flex-row sm:gap-3">
-            <span class="shrink-0 rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">DILD</span>
+            <span class="shrink-0 self-start rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">DILD</span>
             <span>
               <span class="font-semibold text-white" data-en="Dream-Initiated — " data-ar="يبدأ من داخل الحلم — ">Dream-Initiated — </span>
               <span data-en="you become lucid inside a dream that is already running, usually after noticing something impossible." data-ar="تصبح واعيًا داخل حلم جارٍ بالفعل، غالبًا بعد أن تلاحظ شيئًا مستحيلًا.">you become lucid inside a dream that is already running, usually after noticing something impossible.</span>
             </span>
           </li>
           <li class="flex flex-col gap-1 sm:flex-row sm:gap-3">
-            <span class="shrink-0 rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">WILD</span>
+            <span class="shrink-0 self-start rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">WILD</span>
             <span>
               <span class="font-semibold text-white" data-en="Wake-Initiated — " data-ar="يبدأ من اليقظة — ">Wake-Initiated — </span>
               <span data-en="you stay conscious as your body falls asleep and step straight into the dream without losing awareness." data-ar="تبقى واعيًا بينما ينام جسدك، فتدخل الحلم مباشرة دون أن تفقد الوعي.">you stay conscious as your body falls asleep and step straight into the dream without losing awareness.</span>
             </span>
           </li>
           <li class="flex flex-col gap-1 sm:flex-row sm:gap-3">
-            <span class="shrink-0 rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">MILD</span>
+            <span class="shrink-0 self-start rounded-md bg-fuchsia-500/15 px-2 py-0.5 font-mono text-xs font-bold text-fuchsia-300 sm:mt-0.5">MILD</span>
             <span>
               <span class="font-semibold text-white" data-en="Mnemonic Induction — " data-ar="الحث بالاستذكار — ">Mnemonic Induction — </span>
               <span data-en="you prime your memory before sleep so that you recognise the dream from the inside once it starts." data-ar="تُهيّئ ذاكرتك قبل النوم حتى تتعرّف على الحلم من الداخل بمجرد أن يبدأ.">you prime your memory before sleep so that you recognise the dream from the inside once it starts.</span>
@@ -293,11 +407,11 @@
   </section>
 
   <!-- ======================= SECTION 02 — DREAM RECALL ======================= -->
-  <section id="recall" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="recall" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 02" data-ar="القسم ٠٢">Section 02</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Dream Recall — The Foundation" data-ar="استرجاع الأحلام — الأساس">Dream Recall — The Foundation</span>
       </h2>
 
@@ -313,7 +427,7 @@
         </p>
       </div>
 
-      <h3 class="mb-6 mt-12 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-6 mt-10 text-xl font-bold text-white sm:mt-12 sm:text-3xl">
         <span data-en="How to actually improve your recall" data-ar="كيف تحسّن استرجاعك فعليًا">How to actually improve your recall</span>
       </h3>
 
@@ -411,11 +525,11 @@
   </section>
 
   <!-- ======================= SECTION 03 — REALITY CHECKS ======================= -->
-  <section id="checks" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="checks" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 03" data-ar="القسم ٠٣">Section 03</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Reality Checks — The Doorway to Lucidity" data-ar="فحوص الواقع — بوابة الوضوح">Reality Checks — The Doorway to Lucidity</span>
       </h2>
 
@@ -432,7 +546,7 @@
         </p>
       </div>
 
-      <h3 class="mb-4 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-4 mt-10 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="The two best reality checks" data-ar="أفضل فحصين للواقع">The two best reality checks</span>
       </h3>
       <p class="mb-6 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
@@ -443,12 +557,11 @@
 
       <div class="grid gap-4 sm:grid-cols-2">
 
-        <!-- BEST OPTION #1 — Nose Pinch -->
-        <div class="rounded-2xl border card-glass best-card p-6">
-          <div class="mb-3 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <span class="text-3xl">👃</span>
-              <h4 class="text-lg font-bold text-white" data-en="The Nose Pinch" data-ar="قرص الأنف">The Nose Pinch</h4>
+        <div class="rounded-2xl border card-glass best-card p-5 sm:p-6">
+          <div class="mb-3 flex flex-wrap items-start justify-between gap-2 sm:items-center sm:gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
+              <span class="text-2xl sm:text-3xl">👃</span>
+              <h4 class="text-base font-bold text-white sm:text-lg" data-en="The Nose Pinch" data-ar="قرص الأنف">The Nose Pinch</h4>
             </div>
             <span class="best-badge">
               <span aria-hidden="true">★</span>
@@ -467,16 +580,15 @@
           </p>
         </div>
 
-        <!-- BEST OPTION #2 — Pain Pinch (CONDITIONAL) -->
-        <div class="rounded-2xl border card-glass best-card p-6">
-          <div class="mb-3 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <span class="text-3xl">🤏</span>
-              <h4 class="text-lg font-bold text-white" data-en="The Pain Pinch" data-ar="قرص الألم">The Pain Pinch</h4>
+        <div class="rounded-2xl border card-glass best-card p-5 sm:p-6">
+          <div class="mb-3 flex flex-wrap items-start justify-between gap-2 sm:items-center sm:gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
+              <span class="text-2xl sm:text-3xl">🤏</span>
+              <h4 class="text-base font-bold text-white sm:text-lg" data-en="The Pain Pinch" data-ar="قرص الألم">The Pain Pinch</h4>
             </div>
             <span class="best-badge best-badge-conditional">
               <span aria-hidden="true">★</span>
-              <span data-en="Best Option (Conditional)" data-ar="الأفضل (مشروط)">Best Option (Conditional)</span>
+              <span data-en="Best (Conditional)" data-ar="الأفضل (مشروط)">Best (Conditional)</span>
             </span>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
@@ -506,7 +618,7 @@
         </div>
       </div>
 
-      <h3 class="mb-6 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-6 mt-10 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="The habit protocol (how to actually build it)" data-ar="بروتوكول العادة (كيف تبنيها فعليًا)">The habit protocol (how to actually build it)</span>
       </h3>
 
@@ -579,10 +691,10 @@
         </div>
       </div>
 
-      <div class="mt-10 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-6 sm:p-8">
+      <div class="mt-8 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-5 sm:mt-10 sm:p-8">
         <div class="mb-3 flex items-center gap-3">
-          <span class="text-3xl">🧠</span>
-          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+          <span class="text-2xl sm:text-3xl">🧠</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-2xl">
             <span data-en="Critical reflection — the deeper half of the practice" data-ar="التأمل النقدي — النصف الأعمق من الممارسة">Critical reflection — the deeper half of the practice</span>
           </h3>
         </div>
@@ -599,10 +711,10 @@
         </ul>
       </div>
 
-      <h3 class="mb-5 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-10 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="Common mistakes that kill the habit" data-ar="أخطاء شائعة تقتل العادة">Common mistakes that kill the habit</span>
       </h3>
-      <div class="rounded-2xl border border-rose-400/20 bg-rose-500/5 p-6 sm:p-7">
+      <div class="rounded-2xl border border-rose-400/20 bg-rose-500/5 p-5 sm:p-7">
         <ul class="grid gap-3 text-sm leading-relaxed text-rose-50/85 sm:grid-cols-2 sm:text-base">
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Doing them on autopilot — a gesture without the question" data-ar="أداؤها بلا وعي — إشارة بلا سؤال">Doing them on autopilot — a gesture without the question</span></li>
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Dismissing the result (“that's just because I'm tired”)" data-ar="تجاهل النتيجة («هذا مجرد لأنني متعب»)">Dismissing the result (“that's just because I'm tired”)</span></li>
@@ -613,8 +725,8 @@
         </ul>
       </div>
 
-      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
-        <h3 class="mb-3 text-lg font-bold text-white sm:text-xl"
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-5 sm:p-7">
+        <h3 class="mb-3 text-base font-bold text-white sm:text-xl"
             data-en="Realistic expectations" data-ar="توقّعات واقعية">
           Realistic expectations
         </h3>
@@ -628,11 +740,11 @@
   </section>
 
   <!-- ======================= SECTION 04 — PERSISTENT REALITIES ======================= -->
-  <section id="realities" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="realities" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 04" data-ar="القسم ٠٤">Section 04</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Persistent Realities (PRs)" data-ar="الواقع المستمر (PRs)">Persistent Realities (PRs)</span>
       </h2>
 
@@ -647,9 +759,9 @@
         </p>
       </div>
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        <div class="rounded-3xl border border-fuchsia-400/20 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6 sm:p-8">
-          <h3 class="mb-5 flex items-center gap-3 text-xl font-bold text-white">
+      <div class="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-2">
+        <div class="rounded-3xl border border-fuchsia-400/20 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-8">
+          <h3 class="mb-5 flex items-center gap-3 text-lg font-bold text-white sm:text-xl">
             <span class="text-2xl">🏗️</span>
             <span data-en="How to create one" data-ar="كيف تنشئ واقعًا مستمرًا">How to create one</span>
           </h3>
@@ -662,8 +774,8 @@
           </ul>
         </div>
 
-        <div class="rounded-3xl border border-indigo-400/20 bg-gradient-to-b from-indigo-500/10 to-transparent p-6 sm:p-8">
-          <h3 class="mb-5 flex items-center gap-3 text-xl font-bold text-white">
+        <div class="rounded-3xl border border-indigo-400/20 bg-gradient-to-b from-indigo-500/10 to-transparent p-5 sm:p-8">
+          <h3 class="mb-5 flex items-center gap-3 text-lg font-bold text-white sm:text-xl">
             <span class="text-2xl">🧭</span>
             <span data-en="How to maintain one" data-ar="كيف تحافظ عليه">How to maintain one</span>
           </h3>
@@ -680,15 +792,15 @@
   </section>
 
   <!-- ======================= SECTION 05 — ADVANCED CONTROL & EFFORT PARADOX ======================= -->
-  <section id="control" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="control" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 05" data-ar="القسم ٠٥">Section 05</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Advanced Control &amp; “The Effort Paradox”" data-ar="التحكم المتقدّم و«مفارقة الجهد»">Advanced Control &amp; “The Effort Paradox”</span>
       </h2>
 
-      <h3 class="mb-5 mt-10 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-8 text-xl font-bold text-white sm:mt-10 sm:text-3xl">
         <span data-en="Continuing a dream that starts to fade" data-ar="الاستمرار في حلم بدأ يخبو">Continuing a dream that starts to fade</span>
       </h3>
       <p class="mb-6 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
@@ -698,10 +810,10 @@
       </p>
 
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🌀</span>
-            <h4 class="text-lg font-bold text-white" data-en="The Spinning Technique" data-ar="تقنية الدوران">The Spinning Technique</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="The Spinning Technique" data-ar="تقنية الدوران">The Spinning Technique</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="When the image blurs or the dream begins to collapse, spin in a circle — inside the dream — with your arms out, like a child spinning in a garden. The rush of sensation re-engages your dream senses and rebuilds the scene around you. Keep spinning until it re-solidifies. You may land somewhere slightly different; that is fine, the important thing is that you are still dreaming."
@@ -709,10 +821,10 @@
             When the image blurs or the dream begins to collapse, spin in a circle — inside the dream — with your arms out, like a child spinning in a garden. The rush of sensation re-engages your dream senses and rebuilds the scene around you. Keep spinning until it re-solidifies. You may land somewhere slightly different; that is fine, the important thing is that you are still dreaming.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🤲</span>
-            <h4 class="text-lg font-bold text-white" data-en="Rub your hands together" data-ar="افرُك يديك معًا">Rub your hands together</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Rub your hands together" data-ar="افرُك يديك معًا">Rub your hands together</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Friction equals sensation, and sensation equals stability. Rub your palms hard, touch a wall, press your feet into the floor, or run your hand over your own face. Anything that gives your dream body real physical feedback holds the dream together."
@@ -720,10 +832,10 @@
             Friction equals sensation, and sensation equals stability. Rub your palms hard, touch a wall, press your feet into the floor, or run your hand over your own face. Anything that gives your dream body real physical feedback holds the dream together.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🪂</span>
-            <h4 class="text-lg font-bold text-white" data-en="Fall backwards, go limp" data-ar="اسقط إلى الخلف واسترخِ">Fall backwards, go limp</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Fall backwards, go limp" data-ar="اسقط إلى الخلف واسترخِ">Fall backwards, go limp</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Instead of fighting to hold the dream, let go. Fall backwards into it and let the dream catch you. Struggling creates tension, tension creates adrenaline, and adrenaline wakes you up."
@@ -731,10 +843,10 @@
             Instead of fighting to hold the dream, let go. Fall backwards into it and let the dream catch you. Struggling creates tension, tension creates adrenaline, and adrenaline wakes you up.
           </p>
         </div>
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🗣️</span>
-            <h4 class="text-lg font-bold text-white" data-en="Shout, and do not panic" data-ar="اصرخ، ولا تُصاب بالذعر">Shout, and do not panic</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Shout, and do not panic" data-ar="اصرخ، ولا تُصاب بالذعر">Shout, and do not panic</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Say “Clarity now!” or “Stabilise!” out loud in the dream. And above all: stay calm. Panic is the fastest way out of a dream. If you do wake up, do not move — hold the last image in your mind and try to slip back into the same dream."
@@ -744,7 +856,7 @@
         </div>
       </div>
 
-      <h3 class="mb-5 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-12 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="“Thinking hard enough”" data-ar="«أن تفكّر بجدية كافية»">“Thinking hard enough”</span>
       </h3>
       <p class="mb-6 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
@@ -788,14 +900,14 @@
         </div>
       </div>
 
-      <div class="mt-14 overflow-hidden rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 via-purple-700/10 to-indigo-700/15 p-6 shadow-[0_0_60px_-20px_rgba(168,85,247,0.8)] sm:p-9">
+      <div class="mt-10 overflow-hidden rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 via-purple-700/10 to-indigo-700/15 p-5 shadow-[0_0_60px_-20px_rgba(168,85,247,0.8)] sm:mt-14 sm:p-9">
         <div class="mb-4 flex items-center gap-3">
-          <span class="text-3xl">⚡</span>
-          <h3 class="text-2xl font-extrabold text-white sm:text-3xl">
+          <span class="text-2xl sm:text-3xl">⚡</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-3xl">
             <span data-en="The Telekinesis / Self-Defence Rule" data-ar="قاعدة التحريك الذهني / الدفاع عن النفس">The Telekinesis / Self-Defence Rule</span>
           </h3>
         </div>
-        <p class="mb-6 text-base font-semibold text-fuchsia-100 sm:text-lg"
+        <p class="mb-6 text-sm font-semibold text-fuchsia-100 sm:text-lg"
            data-en="This is the single most important rule in advanced dream control. The dream does not respond to what you want. It responds to what you need."
            data-ar="هذه هي القاعدة الأهم في التحكم المتقدّم بالحلم. الحلم لا يستجيب لما تريده، بل يستجيب لما تحتاجه.">
           This is the single most important rule in advanced dream control. The dream does not respond to what you want. It responds to what you need.
@@ -847,24 +959,24 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 06 — STAYING LONGER ======================= -->
-  <section id="longer" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <!-- ======================= SECTION 06 — STAYING EXTRA LONG ======================= -->
+  <section id="longer" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 06" data-ar="القسم ٠٦">Section 06</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Staying Extra Long in the Dream" data-ar="البقاء مدة أطول بكثير في الحلم">Staying Extra Long in the Dream</span>
       </h2>
-      <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
+      <p class="mb-8 text-base leading-relaxed text-indigo-100/80 sm:mb-10 sm:text-lg"
          data-en="A beginner's lucid dream lasts a few minutes at best. These techniques stretch it to twenty, thirty, or — with the right habits — what feels like hours. The difference between a 30-second lucid dream and a 40-minute one is almost entirely technique."
          data-ar="الحلم الواضح الأول للمبتدئ لا يدوم أكثر من بضع دقائق في أفضل الأحوال. هذه التقنيات تمدّده إلى عشرين أو ثلاثين دقيقة، أو — مع العادات الصحيحة — إلى ما يبدو كأنه ساعات. الفرق بين حلم واضح يدوم ٣٠ ثانية وآخر يدوم ٤٠ دقيقة هو تقنية بالكامل تقريبًا.">
         A beginner's lucid dream lasts a few minutes at best. These techniques stretch it to twenty, thirty, or — with the right habits — what feels like hours. The difference between a 30-second lucid dream and a 40-minute one is almost entirely technique.
       </p>
 
-      <div class="mb-8 rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-6 sm:p-8">
+      <div class="mb-8 rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-5 sm:p-8">
         <div class="mb-3 flex items-center gap-3">
-          <span class="text-3xl">🕊️</span>
-          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+          <span class="text-2xl sm:text-3xl">🕊️</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-2xl">
             <span data-en="The Golden Rule: Calm Is Stability" data-ar="القاعدة الذهبية: الهدوء هو الثبات">The Golden Rule: Calm Is Stability</span>
           </h3>
         </div>
@@ -880,7 +992,7 @@
         </ul>
       </div>
 
-      <h3 class="mb-5 mt-12 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-10 text-xl font-bold text-white sm:mt-12 sm:text-3xl">
         <span data-en="The Grounding Sequence (Do This Every Time)" data-ar="تسلسل التثبيت (افعله في كل مرة)">The Grounding Sequence (Do This Every Time)</span>
       </h3>
       <p class="mb-6 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
@@ -958,8 +1070,7 @@
         </div>
       </div>
 
-      <!-- EXTRA-LONG techniques -->
-      <h3 class="mb-5 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-12 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="Extra-Long Techniques (30+ minutes)" data-ar="تقنيات البقاء المطوّل (٣٠+ دقيقة)">Extra-Long Techniques (30+ minutes)</span>
       </h3>
       <p class="mb-6 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
@@ -970,10 +1081,10 @@
 
       <div class="grid gap-5 lg:grid-cols-2">
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">⏳</span>
-            <h4 class="text-lg font-bold text-white" data-en="The Time-Dilation Trick" data-ar="حيلة تمديد الزمن">The Time-Dilation Trick</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="The Time-Dilation Trick" data-ar="حيلة تمديد الزمن">The Time-Dilation Trick</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Expect time to slow down. Tell yourself, calmly and firmly: “This dream is long. I have hours here.” Dream time is not clock time — it stretches to fit what you believe about it. Dreamers who expect long dreams get long dreams. Those who expect them to fade get exactly that."
@@ -982,10 +1093,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🎯</span>
-            <h4 class="text-lg font-bold text-white" data-en="The One-Story Rule" data-ar="قاعدة القصة الواحدة">The One-Story Rule</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="The One-Story Rule" data-ar="قاعدة القصة الواحدة">The One-Story Rule</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Long dreams have a single storyline. Don't jump between unrelated scenes — pick a story and stay in it. “I am exploring an abandoned hotel.” Now explore it: the lobby, the stairs, the rooms, the basement. Depth beats variety for extending time. Every transition is a chance to wake up."
@@ -994,10 +1105,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🌙</span>
-            <h4 class="text-lg font-bold text-white" data-en="Dream in the Morning Window" data-ar="احلم في نافذة الصباح">Dream in the Morning Window</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Dream in the Morning Window" data-ar="احلم في نافذة الصباح">Dream in the Morning Window</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="The last 90 minutes before your natural wake-up is when REM is deepest and longest. Lucid dreams during this window routinely last 3–4 times longer than those from the middle of the night. If you want an extra-long session, aim for a morning nap or a late-morning WBTB — not a midnight attempt."
@@ -1006,10 +1117,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🧘</span>
-            <h4 class="text-lg font-bold text-white" data-en="The Do-Nothing Minute" data-ar="دقيقة اللاشيء">The Do-Nothing Minute</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="The Do-Nothing Minute" data-ar="دقيقة اللاشيء">The Do-Nothing Minute</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="When you first become lucid, do absolutely nothing for a full minute. No walking, no flying, no plans. Just stand and look and breathe. This is the single most effective way to stabilise a dream — almost every dream lost in the first 30 seconds is lost because the dreamer tried to do too much, too soon."
@@ -1018,10 +1129,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">💤</span>
-            <h4 class="text-lg font-bold text-white" data-en="WBTB + DEILD Looping" data-ar="حلقة WBTB + DEILD">WBTB + DEILD Looping</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="WBTB + DEILD Looping" data-ar="حلقة WBTB + DEILD">WBTB + DEILD Looping</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="The most powerful long-session method there is. Do a WBTB, enter a lucid dream, ride it until it ends, then use DEILD to re-enter immediately — and repeat. A single morning can hold four or five chained lucid dreams, each 10–20 minutes long. The total dream time can exceed an hour."
@@ -1030,10 +1141,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🏠</span>
-            <h4 class="text-lg font-bold text-white" data-en="Anchor to a Familiar Place" data-ar="تثبّت في مكان مألوف">Anchor to a Familiar Place</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Anchor to a Familiar Place" data-ar="تثبّت في مكان مألوف">Anchor to a Familiar Place</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Return to a location your brain already knows well — your childhood home, your current bedroom, a street you walk every day. The more familiar the setting, the less effort it takes to render it, and the more of your dream energy is left over for staying in. Unfamiliar worlds drain stability; familiar ones feed it."
@@ -1043,11 +1154,10 @@
         </div>
       </div>
 
-      <!-- DEILD -->
-      <div class="mt-12 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-6 sm:p-8">
+      <div class="mt-10 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-5 sm:mt-12 sm:p-8">
         <div class="mb-3 flex items-center gap-3">
-          <span class="text-3xl">🔁</span>
-          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+          <span class="text-2xl sm:text-3xl">🔁</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-2xl">
             <span data-en="Dream Re-entry (DEILD)" data-ar="إعادة الدخول إلى الحلم (DEILD)">Dream Re-entry (DEILD)</span>
           </h3>
         </div>
@@ -1065,8 +1175,8 @@
         </ol>
       </div>
 
-      <div class="mt-10 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
-        <h3 class="mb-3 text-lg font-bold text-white sm:text-xl"
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-5 sm:mt-10 sm:p-7">
+        <h3 class="mb-3 text-base font-bold text-white sm:text-xl"
             data-en="The Long-Game Mindset" data-ar="عقلية اللعبة الطويلة">
           The Long-Game Mindset
         </h3>
@@ -1077,10 +1187,10 @@
         </p>
       </div>
 
-      <h3 class="mb-5 mt-14 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-5 mt-12 text-xl font-bold text-white sm:mt-14 sm:text-3xl">
         <span data-en="What Destabilises a Dream (Quick Reference)" data-ar="ما يزعزع استقرار الحلم (مرجع سريع)">What Destabilises a Dream (Quick Reference)</span>
       </h3>
-      <div class="rounded-2xl border border-rose-400/20 bg-rose-500/5 p-6 sm:p-7">
+      <div class="rounded-2xl border border-rose-400/20 bg-rose-500/5 p-5 sm:p-7">
         <ul class="grid gap-3 text-sm leading-relaxed text-rose-50/85 sm:grid-cols-2 sm:text-base">
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Excitement, adrenaline, panic" data-ar="الحماس، الأدرينالين، الذعر">Excitement, adrenaline, panic</span></li>
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Trying to control everything at once" data-ar="محاولة التحكم في كل شيء دفعة واحدة">Trying to control everything at once</span></li>
@@ -1096,11 +1206,11 @@
   </section>
 
   <!-- ======================= SECTION 07 — DREAM INCUBATION ======================= -->
-  <section id="incubate" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="incubate" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 07" data-ar="القسم ٠٧">Section 07</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Dream Incubation — How to Dream of a Specific Place" data-ar="احتضان الحلم — كيف تحلم بمكان محدد">Dream Incubation — How to Dream of a Specific Place</span>
       </h2>
 
@@ -1116,7 +1226,7 @@
         </p>
       </div>
 
-      <h3 class="mb-6 mt-12 text-2xl font-bold text-white sm:text-3xl">
+      <h3 class="mb-6 mt-10 text-xl font-bold text-white sm:mt-12 sm:text-3xl">
         <span data-en="The five-step incubation protocol" data-ar="بروتوكول الاحتضان الخماسي">The five-step incubation protocol</span>
       </h3>
 
@@ -1182,11 +1292,10 @@
         </div>
       </div>
 
-      <!-- Bonus: forcing a place from inside a dream -->
-      <div class="mt-12 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-6 sm:p-8">
+      <div class="mt-10 rounded-3xl border border-indigo-400/25 bg-gradient-to-br from-indigo-600/15 to-purple-700/15 p-5 sm:mt-12 sm:p-8">
         <div class="mb-3 flex items-center gap-3">
-          <span class="text-3xl">🚪</span>
-          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+          <span class="text-2xl sm:text-3xl">🚪</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-2xl">
             <span data-en="Bonus: forcing a place from inside a dream" data-ar="إضافة: إجبار مكان من داخل الحلم">Bonus: forcing a place from inside a dream</span>
           </h3>
         </div>
@@ -1210,14 +1319,14 @@
   </section>
 
   <!-- ======================= SECTION 08 — FUN THINGS TO DO ======================= -->
-  <section id="fun" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="fun" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 08" data-ar="القسم ٠٨">Section 08</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Fun Things to Do in a Lucid Dream" data-ar="أشياء ممتعة لتفعلها في الحلم الواضح">Fun Things to Do in a Lucid Dream</span>
       </h2>
-      <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
+      <p class="mb-8 text-base leading-relaxed text-indigo-100/80 sm:mb-10 sm:text-lg"
          data-en="This is the fun part. Once you're in and stable, the entire dream is a sandbox with no rules, no consequences, and no limits except the ones you bring with you. These are the classics — the things dreamers come back to again and again."
          data-ar="هذا هو الجزء الممتع. بمجرد أن تكون داخل الحلم ومستقرًا، يصبح الحلم بأكمله صندوق رمل بلا قواعد ولا عواقب ولا حدود إلا التي تجلبها معك. هذه هي الكلاسيكيات — الأشياء التي يعود إليها الحالمون مرارًا وتكرارًا.">
         This is the fun part. Once you're in and stable, the entire dream is a sandbox with no rules, no consequences, and no limits except the ones you bring with you. These are the classics — the things dreamers come back to again and again.
@@ -1225,10 +1334,10 @@
 
       <div class="grid gap-5 lg:grid-cols-2">
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🕊️</span>
-            <h4 class="text-lg font-bold text-white" data-en="Fly — every style" data-ar="اطِر — بكل الأنماط">Fly — every style</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Fly — every style" data-ar="اطِر — بكل الأنماط">Fly — every style</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Superman-style, soaring like a bird, hovering in place, jumping off buildings, flying through clouds, flying underwater. The trick is not to try to fly — just take a step off the ground and expect to stay up. Every first-time lucid dreamer flies, and every experienced one still loves it."
@@ -1237,10 +1346,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🌍</span>
-            <h4 class="text-lg font-bold text-white" data-en="Visit fictional worlds" data-ar="زُر عوالم خيالية">Visit fictional worlds</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Visit fictional worlds" data-ar="زُر عوالم خيالية">Visit fictional worlds</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Middle-earth, Hogwarts, a Star Wars cantina, the inside of a favourite painting, a city from a video game. Open a door, expect it, walk through. Your brain has been building these worlds for years — in a dream, you finally get to walk around in them."
@@ -1249,10 +1358,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🗣️</span>
-            <h4 class="text-lg font-bold text-white" data-en="Interview a dream character" data-ar="أجرِ مقابلة مع شخصية حلم">Interview a dream character</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Interview a dream character" data-ar="أجرِ مقابلة مع شخصية حلم">Interview a dream character</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Ask them a real question — “What do you represent? What am I avoiding?” — and listen for a real answer. Dream characters often reply with things you did not consciously think of. Many dreamers find this one of the most psychologically rewarding things to do in a dream."
@@ -1261,10 +1370,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🍰</span>
-            <h4 class="text-lg font-bold text-white" data-en="Eat dream food" data-ar="كُل طعام الحلم">Eat dream food</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Eat dream food" data-ar="كُل طعام الحلم">Eat dream food</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Summon a meal and taste it. Dream taste is unreliable but vivid — sometimes stronger than waking food. Imagine a dish you have always wanted to try, or invent one. You cannot get full, you cannot gain weight, and you never have to pay for it."
@@ -1273,10 +1382,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🌦️</span>
-            <h4 class="text-lg font-bold text-white" data-en="Control the weather" data-ar="تحكّم في الطقس">Control the weather</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Control the weather" data-ar="تحكّم في الطقس">Control the weather</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Clear skies, thunderstorms, snow falling only on you, a rainbow that you can walk along. Raise your hand and announce the weather. Expect it. The sky obeys — instantly, and without argument."
@@ -1285,10 +1394,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🧬</span>
-            <h4 class="text-lg font-bold text-white" data-en="Shape-shift" data-ar="غيّر شكلك">Shape-shift</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Shape-shift" data-ar="غيّر شكلك">Shape-shift</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Become an animal, a younger version of yourself, a character from a film, a version of you from twenty years in the future. Change your voice, your height, your gender. In a dream, identity is a costume — try it on."
@@ -1297,10 +1406,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">⏳</span>
-            <h4 class="text-lg font-bold text-white" data-en="Time travel" data-ar="السفر في الزمن">Time travel</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Time travel" data-ar="السفر في الزمن">Time travel</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Visit a historical event. Stand in a Roman forum, watch a Viking ship land, see your hometown a hundred years ago. Or jump forward and see a plausible future — the dream will happily generate one for you. Do not worry about accuracy; this is imagination, not prophecy."
@@ -1309,10 +1418,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🎨</span>
-            <h4 class="text-lg font-bold text-white" data-en="Create art, music, or a whole building" data-ar="اصنع فنًا، أو موسيقى، أو بناءً كاملًا">Create art, music, or a whole building</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Create art, music, or a whole building" data-ar="اصنع فنًا، أو موسيقى، أو بناءً كاملًا">Create art, music, or a whole building</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Paint on a wall and have the paint stay where you put it. Compose music and hear it back. Build a house from the ground up — walls first, then the roof, then furniture. This is the closest thing to a personal universe that exists."
@@ -1321,10 +1430,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">📚</span>
-            <h4 class="text-lg font-bold text-white" data-en="Ask your subconscious a real question" data-ar="اطرح على لا وعيك سؤالًا حقيقيًا">Ask your subconscious a real question</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Ask your subconscious a real question" data-ar="اطرح على لا وعيك سؤالًا حقيقيًا">Ask your subconscious a real question</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Before bed, set one specific question. In the dream, ask it to the first character you meet, or to a mirror, or to the sky. Many dreamers report answers that feel genuinely insightful — and occasionally life-changing. Not because the dream is magic, but because your subconscious was never given a chance to answer before."
@@ -1333,10 +1442,10 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-6 sm:col-span-2 lg:col-span-1">
+        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:p-6 sm:col-span-2 lg:col-span-1">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🎮</span>
-            <h4 class="text-lg font-bold text-white" data-en="Live out a fantasy, safely" data-ar="عِش خيالك، بأمان">Live out a fantasy, safely</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="Live out a fantasy, safely" data-ar="عِش خيالك، بأمان">Live out a fantasy, safely</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="In a lucid dream you can do things that would be dangerous, impossible, or socially unacceptable in waking life — because none of it is real, and none of it has consequences. This is not escapism; it is practice in imagination. Use it as you see fit."
@@ -1346,8 +1455,8 @@
         </div>
       </div>
 
-      <div class="mt-8 rounded-2xl border border-fuchsia-400/25 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-6 sm:p-7">
-        <h3 class="mb-3 text-lg font-bold text-white sm:text-xl"
+      <div class="mt-8 rounded-2xl border border-fuchsia-400/25 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-5 sm:p-7">
+        <h3 class="mb-3 text-base font-bold text-white sm:text-xl"
             data-en="One more idea: practice real skills" data-ar="فكرة إضافية: تدرّب على مهارات حقيقية">
           One more idea: practice real skills
         </h3>
@@ -1360,12 +1469,12 @@
     </div>
   </section>
 
-  <!-- ======================= SECTION 09 — CONTINUING DREAMS AFTER THEY END ======================= -->
-  <section id="continue" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <!-- ======================= SECTION 09 — CONTINUING DREAMS ======================= -->
+  <section id="continue" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 09" data-ar="القسم ٠٩">Section 09</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="How to Continue Dreams After They End" data-ar="كيف تستمر في الأحلام بعد انتهائها">How to Continue Dreams After They End</span>
       </h2>
 
@@ -1376,13 +1485,12 @@
         </p>
       </div>
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+      <div class="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-2">
 
-        <!-- Method 1: DEILD -->
-        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🔁</span>
-            <h4 class="text-lg font-bold text-white" data-en="1. DEILD — the direct re-entry" data-ar="١. DEILD — إعادة الدخول المباشرة">1. DEILD — the direct re-entry</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="1. DEILD — the direct re-entry" data-ar="١. DEILD — إعادة الدخول المباشرة">1. DEILD — the direct re-entry</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="The most reliable method. Don't move. Don't open your eyes. Hold the last image of the dream and silently repeat “I am still dreaming” until you slide back in. Most people are back inside in 10–60 seconds. This is the foundation of dream chaining — master it first."
@@ -1391,11 +1499,10 @@
           </p>
         </div>
 
-        <!-- Method 2: Same scene -->
-        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🎬</span>
-            <h4 class="text-lg font-bold text-white" data-en="2. Resume the exact scene" data-ar="٢. استأنف المشهد نفسه">2. Resume the exact scene</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="2. Resume the exact scene" data-ar="٢. استأنف المشهد نفسه">2. Resume the exact scene</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Unlike DEILD — where you just slide back in and might land anywhere — this method aims to return to the exact moment the dream ended. Hold the last frame in your mind. Not the story, not the emotion: the frame. Who was standing where. What you were looking at. What the light was doing. When you re-enter, expect to be in that exact moment and continue from there."
@@ -1404,11 +1511,10 @@
           </p>
         </div>
 
-        <!-- Method 3: Chain a new dream -->
-        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">⛓️</span>
-            <h4 class="text-lg font-bold text-white" data-en="3. Chain a brand-new dream" data-ar="٣. ابدأ حلمًا جديدًا متسلسلًا">3. Chain a brand-new dream</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="3. Chain a brand-new dream" data-ar="٣. ابدأ حلمًا جديدًا متسلسلًا">3. Chain a brand-new dream</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="Sometimes the old dream is dead and trying to revive it wastes energy. Instead, start a new one — deliberately. Pick a fresh scene, hold it in your mind, and re-enter expecting to land there. This is how lucid dreamers get three or four separate dreams in one morning. Note: chaining a new dream is easier than resuming an old one, because the old scene has already been “used up.”"
@@ -1417,11 +1523,10 @@
           </p>
         </div>
 
-        <!-- Method 4: Nap relay -->
-        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-6">
+        <div class="rounded-2xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/10 to-transparent p-5 sm:p-6">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">💤</span>
-            <h4 class="text-lg font-bold text-white" data-en="4. The nap relay" data-ar="٤. تتابع القيلولة">4. The nap relay</h4>
+            <h4 class="text-base font-bold text-white sm:text-lg" data-en="4. The nap relay" data-ar="٤. تتابع القيلولة">4. The nap relay</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
              data-en="If you genuinely wake up and lose the dream, do not fight it. Get up for 10–15 minutes, do a few reality checks, remind yourself of the target scene, then go back to bed. You will re-enter REM quickly and can pick up where you left off — sometimes in the same dream, sometimes in a brand-new one. This is the safest long-session method because it uses a full WBTB cycle."
@@ -1431,11 +1536,10 @@
         </div>
       </div>
 
-      <!-- Dream chaining protocol -->
-      <div class="mt-12 rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-6 sm:p-8">
+      <div class="mt-10 rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-600/15 to-indigo-700/15 p-5 sm:mt-12 sm:p-8">
         <div class="mb-3 flex items-center gap-3">
-          <span class="text-3xl">⛓️</span>
-          <h3 class="text-xl font-extrabold text-white sm:text-2xl">
+          <span class="text-2xl sm:text-3xl">⛓️</span>
+          <h3 class="text-lg font-extrabold text-white sm:text-2xl">
             <span data-en="Dream Chaining — the master protocol" data-ar="تسلسل الأحلام — البروتوكول الرئيسي">Dream Chaining — the master protocol</span>
           </h3>
         </div>
@@ -1458,8 +1562,8 @@
         </p>
       </div>
 
-      <div class="mt-10 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
-        <h3 class="mb-3 text-lg font-bold text-white sm:text-xl"
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-5 sm:mt-10 sm:p-7">
+        <h3 class="mb-3 text-base font-bold text-white sm:text-xl"
             data-en="The number-one mistake" data-ar="الخطأ رقم واحد">
           The number-one mistake
         </h3>
@@ -1473,24 +1577,24 @@
   </section>
 
   <!-- ======================= SECTION 10 — METHODS ======================= -->
-  <section id="methods" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="methods" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 10" data-ar="القسم ١٠">Section 10</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="New &amp; Cool Ways to Lucid Dream" data-ar="طرق جديدة وممتعة للحلم الواضح">New &amp; Cool Ways to Lucid Dream</span>
       </h2>
-      <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
+      <p class="mb-8 text-base leading-relaxed text-indigo-100/80 sm:mb-10 sm:text-lg"
          data-en="Reality checks (Section 03) are the foundation — start there first. The methods below are the ones that pair best with a strong reality-check habit."
          data-ar="فحوص الواقع (القسم ٠٣) هي الأساس — ابدأ من هناك أولًا. الطرق التالية هي التي تتكامل بشكل أفضل مع عادة فحص الواقع القوية.">
         Reality checks (Section 03) are the foundation — start there first. The methods below are the ones that pair best with a strong reality-check habit.
       </p>
 
       <div class="grid gap-5 lg:grid-cols-2">
-        <div class="rounded-3xl border border-white/10 card-glass p-6 sm:p-7">
+        <div class="rounded-3xl border border-white/10 card-glass p-5 sm:p-7">
           <div class="mb-3 flex items-center gap-3">
-            <span class="text-3xl">⏰</span>
-            <h3 class="text-lg font-bold text-white sm:text-xl">
+            <span class="text-2xl sm:text-3xl">⏰</span>
+            <h3 class="text-base font-bold text-white sm:text-xl">
               <span data-en="1. Wake Back to Bed (WBTB)" data-ar="١. الاستيقاظ والعودة إلى النوم (WBTB)">1. Wake Back to Bed (WBTB)</span>
             </h3>
           </div>
@@ -1501,10 +1605,10 @@
           </p>
         </div>
 
-        <div class="rounded-3xl border border-white/10 card-glass p-6 sm:p-7">
+        <div class="rounded-3xl border border-white/10 card-glass p-5 sm:p-7">
           <div class="mb-3 flex items-center gap-3">
-            <span class="text-3xl">🌊</span>
-            <h3 class="text-lg font-bold text-white sm:text-xl">
+            <span class="text-2xl sm:text-3xl">🌊</span>
+            <h3 class="text-base font-bold text-white sm:text-xl">
               <span data-en="2. WILD (Wake-Initiated)" data-ar="٢. WILD — البدء من اليقظة">2. WILD (Wake-Initiated)</span>
             </h3>
           </div>
@@ -1515,10 +1619,10 @@
           </p>
         </div>
 
-        <div class="rounded-3xl border border-white/10 card-glass p-6 sm:p-7">
+        <div class="rounded-3xl border border-white/10 card-glass p-5 sm:p-7">
           <div class="mb-3 flex items-center gap-3">
-            <span class="text-3xl">🧩</span>
-            <h3 class="text-lg font-bold text-white sm:text-xl">
+            <span class="text-2xl sm:text-3xl">🧩</span>
+            <h3 class="text-base font-bold text-white sm:text-xl">
               <span data-en="3. MILD (Mnemonic Induction)" data-ar="٣. MILD — الحث بالاستذكار">3. MILD (Mnemonic Induction)</span>
             </h3>
           </div>
@@ -1529,10 +1633,10 @@
           </p>
         </div>
 
-        <div class="rounded-3xl border border-white/10 card-glass p-6 sm:p-7">
+        <div class="rounded-3xl border border-white/10 card-glass p-5 sm:p-7">
           <div class="mb-3 flex items-center gap-3">
-            <span class="text-3xl">🎨</span>
-            <h3 class="text-lg font-bold text-white sm:text-xl">
+            <span class="text-2xl sm:text-3xl">🎨</span>
+            <h3 class="text-base font-bold text-white sm:text-xl">
               <span data-en="4. Visualisation, naps &amp; alarms" data-ar="٤. التخيّل، القيلولة، والمنبّهات">4. Visualisation, naps &amp; alarms</span>
             </h3>
           </div>
@@ -1547,23 +1651,23 @@
   </section>
 
   <!-- ======================= SECTION 11 — WHAT NOT TO DO ======================= -->
-  <section id="avoid" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="avoid" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-rose-300/80 sm:text-xs"
             data-en="Section 11" data-ar="القسم ١١">Section 11</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="What NOT to Do" data-ar="ما يجب تجنّبه">What NOT to Do</span>
       </h2>
-      <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
+      <p class="mb-8 text-base leading-relaxed text-indigo-100/80 sm:mb-10 sm:text-lg"
          data-en="Most lucid dreams end early because of one of these three mistakes. Avoiding them will instantly make your dreams longer and more stable."
          data-ar="معظم الأحلام الواضحة تنتهي مبكرًا بسبب أحد هذه الأخطاء الثلاثة. تجنّبها سيجعل أحلامك أطول وأكثر استقرارًا فورًا.">
         Most lucid dreams end early because of one of these three mistakes. Avoiding them will instantly make your dreams longer and more stable.
       </p>
 
       <div class="grid gap-5 lg:grid-cols-3">
-        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">🤩</div>
-          <h3 class="mb-3 text-lg font-bold text-white">
+        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">🤩</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">
             <span data-en="Do not get too excited" data-ar="لا تفرط في الحماس">Do not get too excited</span>
           </h3>
           <p class="text-sm leading-relaxed text-rose-50/80"
@@ -1573,9 +1677,9 @@
           </p>
         </div>
 
-        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">🪞</div>
-          <h3 class="mb-3 text-lg font-bold text-white">
+        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">🪞</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">
             <span data-en="Do not look into mirrors" data-ar="لا تنظر في المرايا">Do not look into mirrors</span>
           </h3>
           <p class="text-sm leading-relaxed text-rose-50/80"
@@ -1585,9 +1689,9 @@
           </p>
         </div>
 
-        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">🙈</div>
-          <h3 class="mb-3 text-lg font-bold text-white">
+        <div class="rounded-3xl border border-rose-400/25 bg-gradient-to-b from-rose-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">🙈</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">
             <span data-en="Do not close your eyes in the dream" data-ar="لا تغلق عينيك داخل الحلم">Do not close your eyes in the dream</span>
           </h3>
           <p class="text-sm leading-relaxed text-rose-50/80"
@@ -1598,8 +1702,8 @@
         </div>
       </div>
 
-      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
-        <h3 class="mb-4 text-lg font-bold text-white"
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-5 sm:p-7">
+        <h3 class="mb-4 text-base font-bold text-white sm:text-lg"
             data-en="Four more things that end dreams early" data-ar="أربعة أمور أخرى تُنهي الأحلام مبكرًا">
           Four more things that end dreams early
         </h3>
@@ -1614,23 +1718,23 @@
   </section>
 
   <!-- ======================= SECTION 12 — RESOURCES ======================= -->
-  <section id="resources" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+  <section id="resources" class="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-24">
     <div class="reveal">
       <span class="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-300/80 sm:text-xs"
             data-en="Section 12" data-ar="القسم ١٢">Section 12</span>
-      <h2 class="mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+      <h2 class="mb-6 text-2xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
         <span data-en="Resources &amp; Further Reading" data-ar="المصادر وقراءات إضافية">Resources &amp; Further Reading</span>
       </h2>
-      <p class="mb-10 text-base leading-relaxed text-indigo-100/80 sm:text-lg"
+      <p class="mb-8 text-base leading-relaxed text-indigo-100/80 sm:mb-10 sm:text-lg"
          data-en="You do not have to learn this alone. These are the best places to read, ask questions, and compare notes with other dreamers."
          data-ar="لست مضطرًا لتعلّم هذا وحدك. هذه أفضل الأماكن للقراءة وطرح الأسئلة ومقارنة الملاحظات مع حالمين آخرين.">
         You do not have to learn this alone. These are the best places to read, ask questions, and compare notes with other dreamers.
       </p>
 
       <div class="grid gap-5 lg:grid-cols-3">
-        <div class="flex flex-col rounded-3xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">💬</div>
-          <h3 class="mb-3 text-lg font-bold text-white">r/LucidDreaming</h3>
+        <div class="flex flex-col rounded-3xl border border-indigo-400/25 bg-gradient-to-b from-indigo-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">💬</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">r/LucidDreaming</h3>
           <p class="flex-1 text-sm leading-relaxed text-indigo-100/80"
              data-en="A large, active community on Reddit with beginner guides, technique debates, and thousands of dream reports to learn from. Great for troubleshooting and finding people working on the same technique."
              data-ar="مجتمع كبير ونشط على ريديت فيه أدلة للمبتدئين، ونقاشات حول التقنيات، وآلاف تقارير الأحلام للتعلّم منها. ممتاز لحلّ المشكلات وإيجاد أشخاص يعملون على التقنية نفسها.">
@@ -1643,9 +1747,9 @@
           </a>
         </div>
 
-        <div class="flex flex-col rounded-3xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">📖</div>
-          <h3 class="mb-3 text-lg font-bold text-white">
+        <div class="flex flex-col rounded-3xl border border-fuchsia-400/25 bg-gradient-to-b from-fuchsia-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">📖</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">
             <span data-en="Exploring the World of Lucid Dreaming" data-ar="استكشاف عالم الحلم الواضح">Exploring the World of Lucid Dreaming</span>
           </h3>
           <p class="flex-1 text-sm leading-relaxed text-indigo-100/80"
@@ -1655,9 +1759,9 @@
           </p>
         </div>
 
-        <div class="flex flex-col rounded-3xl border border-purple-400/25 bg-gradient-to-b from-purple-500/12 to-transparent p-6 sm:p-7">
-          <div class="mb-3 text-3xl">🗂️</div>
-          <h3 class="mb-3 text-lg font-bold text-white">Dream Views</h3>
+        <div class="flex flex-col rounded-3xl border border-purple-400/25 bg-gradient-to-b from-purple-500/12 to-transparent p-5 sm:p-7">
+          <div class="mb-3 text-2xl sm:text-3xl">🗂️</div>
+          <h3 class="mb-3 text-base font-bold text-white sm:text-lg">Dream Views</h3>
           <p class="flex-1 text-sm leading-relaxed text-indigo-100/80"
              data-en="One of the oldest lucid dreaming forums on the internet. Slower-paced than Reddit, but with deep archives and long-form discussions on persistent realities and advanced techniques."
              data-ar="أحد أقدم منتديات الحلم الواضح على الإنترنت. أبطأ إيقاعًا من ريديت، لكنه يضمّ أرشيفًا عميقًا ونقاشات مطوّلة حول الواقع المستمر والتقنيات المتقدّمة.">
@@ -1671,8 +1775,8 @@
         </div>
       </div>
 
-      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-6 sm:p-7">
-        <h3 class="mb-4 text-lg font-bold text-white"
+      <div class="mt-8 rounded-2xl border border-white/10 card-glass p-5 sm:p-7">
+        <h3 class="mb-4 text-base font-bold text-white sm:text-lg"
             data-en="How to get the most out of any dream community" data-ar="كيف تستفيد أقصى استفادة من أي مجتمع للحالمين">
           How to get the most out of any dream community
         </h3>
@@ -1686,7 +1790,7 @@
     </div>
   </section>
 
-  <footer class="relative z-10 mt-10 border-t border-white/5 py-12">
+  <footer class="relative z-10 mt-10 border-t border-white/5 py-10 sm:py-12">
     <div class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 text-center sm:px-6">
       <div class="flex items-center gap-2 text-2xl">🌙</div>
       <p class="text-sm font-semibold text-indigo-100"
@@ -1785,6 +1889,33 @@
     for (var r = 0; r < reveals.length; r++) observer.observe(reveals[r]);
   } else {
     for (var s = 0; s < reveals.length; s++) reveals[s].classList.add('is-visible');
+  }
+
+  /* Mobile nav: highlight the section currently in view */
+  var navPills = document.querySelectorAll('.nav-pill');
+  if ('IntersectionObserver' in window && navPills.length) {
+    var map = {};
+    navPills.forEach(function (a) {
+      var id = a.getAttribute('href').replace('#', '');
+      if (id) map[id] = a;
+    });
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var pill = map[entry.target.id];
+        if (!pill) return;
+        if (entry.isIntersecting) {
+          navPills.forEach(function (p) { p.style.background = ''; p.style.color = ''; p.style.borderColor = ''; });
+          pill.style.background = 'rgba(168,85,247,.22)';
+          pill.style.color = '#fff';
+          pill.style.borderColor = 'rgba(168,85,247,.45)';
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    Object.keys(map).forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (sec) sectionObserver.observe(sec);
+    });
   }
 })();
 </script>
