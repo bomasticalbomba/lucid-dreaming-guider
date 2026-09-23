@@ -82,6 +82,25 @@
   html[lang="ar"] h2, html[lang="ar"] h3 { line-height: 1.55; padding-bottom: 0.15em; }
 
   .card-glass { background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.02)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .best-card { border-color: rgba(52,211,153,.35) !important; box-shadow: 0 0 30px -12px rgba(52,211,153,.55); }
+
+  .best-badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    border-radius: 9999px;
+    padding: .2rem .7rem;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    box-shadow: 0 0 14px -2px rgba(16,185,129,.8);
+  }
+  .best-badge-conditional {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 0 14px -2px rgba(245,158,11,.8);
+  }
+
   ::selection { background: rgba(168,85,247,.4); color: #fff; }
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: #07040f; }
@@ -170,8 +189,8 @@
         <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Techniques" data-ar="تقنيات">Techniques</div>
       </div>
       <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
-        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="3" data-ar="٣">3</div>
-        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Curated resources" data-ar="مصادر مختارة">Curated resources</div>
+        <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="8" data-ar="٨">8</div>
+        <div class="mt-1 text-[11px] font-medium text-indigo-200/60 sm:text-xs" data-en="Reality checks" data-ar="فحوص واقع">Reality checks</div>
       </div>
       <div class="rounded-2xl border border-white/8 card-glass px-3 py-4">
         <div class="text-lg font-black text-fuchsia-300 sm:text-xl" data-en="0$" data-ar="٠$">0$</div>
@@ -411,14 +430,86 @@
       </div>
 
       <!-- The best reality checks -->
-      <h3 class="mb-6 mt-14 text-2xl font-bold text-white sm:text-3xl">
-        <span data-en="The seven best reality checks" data-ar="أفضل سبعة فحوص للواقع">The seven best reality checks</span>
+      <h3 class="mb-4 mt-14 text-2xl font-bold text-white sm:text-3xl">
+        <span data-en="The best reality checks" data-ar="أفضل فحوص الواقع">The best reality checks</span>
       </h3>
       <p class="mb-6 text-sm leading-relaxed text-indigo-100/80 sm:text-base"
-         data-en="No single check is perfect — use two or three together. The most reliable combination is the hand check plus the nose pinch."
-         data-ar="لا يوجد فحص واحد مثالي — استخدم اثنين أو ثلاثة معًا. أكثر تركيبة موثوقة هي فحص اليدين مع قرص الأنف.">
-        No single check is perfect — use two or three together. The most reliable combination is the hand check plus the nose pinch.
+         data-en="Two checks are marked as Best Options — start with those. The Nose Pinch is the most reliable in practice. The Pain Pinch is powerful but conditional. Always use at least two checks together — no single check is perfect."
+         data-ar="فحصان مُعلَّمان كخيارَين الأفضل — ابدأ بهما. قرص الأنف هو الأكثر موثوقية عمليًا. قرص الألم قوي لكنه مشروط. استخدم دائمًا فحصين معًا على الأقل — لا يوجد فحص واحد مثالي.">
+        Two checks are marked as Best Options — start with those. The Nose Pinch is the most reliable in practice. The Pain Pinch is powerful but conditional. Always use at least two checks together — no single check is perfect.
       </p>
+
+      <!-- The two Best Options -->
+      <div class="grid gap-4 sm:grid-cols-2">
+
+        <!-- BEST OPTION #1 — Nose Pinch -->
+        <div class="rounded-2xl border card-glass best-card p-6">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">👃</span>
+              <h4 class="text-lg font-bold text-white" data-en="The Nose Pinch" data-ar="قرص الأنف">The Nose Pinch</h4>
+            </div>
+            <span class="best-badge">
+              <span aria-hidden="true">★</span>
+              <span data-en="Best Option" data-ar="الخيار الأفضل">Best Option</span>
+            </span>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use. It works almost every time, and it never fails to feel convincing."
+             data-ar="أغمض فتحتي أنفك بإصبعيك وحاول الشهيق من أنفك. في اليقظة لا يمرّ هواء. أما في الحلم فيمرّ الهواء رغم ذلك — لأن جسد الحلم لا يخضع لفيزياء اليقظة. هذا أكثر فحص موثوقية، وهو الذي يستخدمه معظم الحالمين المتمرّسين. ينجح في كل مرة تقريبًا، ولا يفشل أبدًا في أن يكون مقنعًا.">
+            Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use. It works almost every time, and it never fails to feel convincing.
+          </p>
+          <p class="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-500/8 p-3 text-xs font-medium text-emerald-100 sm:text-sm"
+             data-en="Why it's the best: it relies on a bodily sensation you cannot fake or misread. If air moves, you are dreaming — no interpretation required."
+             data-ar="لماذا هو الأفضل: يعتمد على إحساس جسدي لا يمكن تزييفه أو قراءته بشكل خاطئ. إن مرّ الهواء فأنت تحلم — دون حاجة إلى تفسير.">
+            Why it's the best: it relies on a bodily sensation you cannot fake or misread. If air moves, you are dreaming — no interpretation required.
+          </p>
+        </div>
+
+        <!-- BEST OPTION #2 — Pain Pinch (CONDITIONAL) -->
+        <div class="rounded-2xl border card-glass best-card p-6">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🤏</span>
+              <h4 class="text-lg font-bold text-white" data-en="The Pain Pinch" data-ar="قرص الألم">The Pain Pinch</h4>
+            </div>
+            <span class="best-badge best-badge-conditional">
+              <span aria-hidden="true">★</span>
+              <span data-en="Best Option (Conditional)" data-ar="الأفضل (مشروط)">Best Option (Conditional)</span>
+            </span>
+          </div>
+          <p class="text-sm leading-relaxed text-indigo-200/70"
+             data-en="Pinch yourself — hard — on the arm, the thigh, or the back of your hand. In waking life, it hurts. In a dream, for many people, it does not. If you feel nothing — no sharp sting, no ache, no reflex — you are almost certainly dreaming. This is one of the most direct and physically grounding reality checks available."
+             data-ar="اقرص نفسك — بقوة — على الذراع، أو الفخذ، أو ظهر اليد. في اليقظة يؤلم. أما في الحلم، فبالنسبة لكثير من الناس لا يؤلم. إن لم تشعر بشيء — لا وخز حاد، ولا ألم، ولا منعكس — فأنت على الأرجح تحلم. هذا أحد أكثر فحوص الواقع مباشرة وقدرة على تثبيت الإحساس الجسدي.">
+            Pinch yourself — hard — on the arm, the thigh, or the back of your hand. In waking life, it hurts. In a dream, for many people, it does not. If you feel nothing — no sharp sting, no ache, no reflex — you are almost certainly dreaming. This is one of the most direct and physically grounding reality checks available.
+          </p>
+
+          <!-- DISCLAIMER -->
+          <div class="mt-4 rounded-xl border border-amber-400/35 bg-amber-500/10 p-4">
+            <div class="mb-2 flex items-center gap-2">
+              <span class="text-lg" aria-hidden="true">⚠️</span>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-amber-200"
+                    data-en="Important Disclaimer" data-ar="تنبيه مهم">Important Disclaimer</span>
+            </div>
+            <p class="text-xs leading-relaxed text-amber-50/90 sm:text-sm"
+               data-en="This check only works if you do not feel pain in your dreams. Pain sensitivity during dreams varies enormously from person to person. Many dreamers feel full pain in dreams, in which case this check will not tell you anything — you will pinch, it will hurt, and it will feel exactly like waking life. If you are one of those dreamers, skip this check and rely on the Nose Pinch instead. Do not use this check as your only one."
+               data-ar="هذا الفحص لا ينجح إلا إذا كنت لا تشعر بالألم في أحلامك. تتفاوت حساسية الألم أثناء الأحلام بشكل هائل من شخص لآخر. كثير من الحالمين يشعرون بالألم الكامل في أحلامهم، وفي هذه الحالة لا يفيدك هذا الفحص بشيء — ستقرص، سيؤلم، وسيبدو تمامًا كاليقظة. إن كنت من هؤلاء الحالمين، فتجاوز هذا الفحص واعتمد على قرص الأنف بدلًا منه. لا تستخدم هذا الفحص كفحصك الوحيد.">
+              This check only works if you do not feel pain in your dreams. Pain sensitivity during dreams varies enormously from person to person. Many dreamers feel full pain in dreams, in which case this check will not tell you anything — you will pinch, it will hurt, and it will feel exactly like waking life. If you are one of those dreamers, skip this check and rely on the Nose Pinch instead. Do not use this check as your only one.
+            </p>
+          </div>
+
+          <p class="mt-3 text-xs leading-relaxed text-indigo-200/60 sm:text-sm"
+             data-en="How to find out which type you are: before bed, pinch yourself gently a few times and remember the exact sensation. In a dream, compare. If the sensation is missing, you're dreaming. If it's identical to waking, you're not — or you're a pain-feeling dreamer and this check is useless to you."
+             data-ar="كيف تعرف أي نوع أنت: قبل النوم، اقرص نفسك بلطف بضع مرات وتذكّر الإحساس بدقة. في الحلم، قارن. إن كان الإحساس غائبًا فأنت تحلم. وإن كان مطابقًا لليقظة، فأنت لا تحلم — أو أنك من الحالمين الذين يشعرون بالألم، وهذا الفحص لا يفيدك.">
+            How to find out which type you are: before bed, pinch yourself gently a few times and remember the exact sensation. In a dream, compare. If the sensation is missing, you're dreaming. If it's identical to waking, you're not — or you're a pain-feeling dreamer and this check is useless to you.
+          </p>
+        </div>
+      </div>
+
+      <!-- The rest of the checks -->
+      <h3 class="mb-6 mt-12 text-2xl font-bold text-white sm:text-3xl">
+        <span data-en="Additional reality checks" data-ar="فحوص إضافية للواقع">Additional reality checks</span>
+      </h3>
 
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div class="rounded-2xl border border-white/8 card-glass p-5">
@@ -430,18 +521,6 @@
              data-en="Look at your hands. Count your fingers slowly. Look away for two seconds and look back. In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or a different number on the second look. This is the most popular reality check because it works almost every time."
              data-ar="انظر إلى يديك. عُدّ أصابعك ببطء. انظر بعيدًا لثانيتين ثم عُد. في الأحلام تكون الأصابع غالبًا خاطئة — أكثر من اللازم، أو أقل، أو ذائبة، أو مشوّشة، أو بعدد مختلف عند النظرة الثانية. هذا أشهر فحص للواقع لأنه ينجح في كل مرة تقريبًا.">
             Look at your hands. Count your fingers slowly. Look away for two seconds and look back. In dreams, fingers are frequently wrong — too many, too few, melting, blurred, or a different number on the second look. This is the most popular reality check because it works almost every time.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/8 card-glass p-5">
-          <div class="mb-3 flex items-center gap-3">
-            <span class="text-2xl">👃</span>
-            <h4 class="font-bold text-white" data-en="2. The Nose Pinch" data-ar="٢. قرص الأنف">2. The Nose Pinch</h4>
-          </div>
-          <p class="text-sm leading-relaxed text-indigo-200/70"
-             data-en="Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use."
-             data-ar="أغمض فتحتي أنفك بإصبعيك وحاول الشهيق من أنفك. في اليقظة لا يمرّ هواء. أما في الحلم فيمرّ الهواء رغم ذلك — لأن جسد الحلم لا يخضع لفيزياء اليقظة. هذا أكثر فحص موثوقية، وهو الذي يستخدمه معظم الحالمين المتمرّسين.">
-            Pinch your nostrils shut with your fingers and try to inhale through your nose. In waking life, no air moves. In a dream, air still flows — your dream body does not obey waking physics. This is the single most reliable check and the one most experienced dreamers use.
           </p>
         </div>
 
@@ -493,7 +572,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/8 card-glass p-5 sm:col-span-2 lg:col-span-3">
+        <div class="rounded-2xl border border-white/8 card-glass p-5">
           <div class="mb-3 flex items-center gap-3">
             <span class="text-2xl">🔊</span>
             <h4 class="font-bold text-white" data-en="7. The Sound Check" data-ar="٧. فحص الصوت">7. The Sound Check</h4>
@@ -554,9 +633,9 @@
             <h4 class="font-bold text-white" data-en="Vary your checks" data-ar="نوّع في الفحوص">Vary your checks</h4>
           </div>
           <p class="text-sm leading-relaxed text-indigo-200/70"
-             data-en="Don't only look at your hands. Rotate through the list — hand check, nose pinch, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams."
-             data-ar="لا تقتصر على النظر إلى يديك. تنقّل بين القائمة — فحص اليدين، قرص الأنف، فحص الساعة، الإصبع عبر راحة اليد. التنويع يُبقي الممارسة نشطة ذهنيًا ويغطّي حالات فشل أكثر في الحلم.">
-            Don't only look at your hands. Rotate through the list — hand check, nose pinch, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams.
+             data-en="Don't only look at your hands. Rotate through the list — nose pinch, pain pinch (if it applies to you), hand check, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams."
+             data-ar="لا تقتصر على النظر إلى يديك. تنقّل بين القائمة — قرص الأنف، قرص الألم (إن كان ينطبق عليك)، فحص اليدين، فحص الساعة، الإصبع عبر راحة اليد. التنويع يُبقي الممارسة نشطة ذهنيًا ويغطّي حالات فشل أكثر في الحلم.">
+            Don't only look at your hands. Rotate through the list — nose pinch, pain pinch (if it applies to you), hand check, clock check, finger through palm. Variety keeps the practice mentally active and covers more failure modes in dreams.
           </p>
         </div>
 
@@ -614,10 +693,10 @@
         <ul class="grid gap-3 text-sm leading-relaxed text-rose-50/85 sm:grid-cols-2 sm:text-base">
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Doing them on autopilot — a gesture without the question" data-ar="أداؤها بلا وعي — إشارة بلا سؤال">Doing them on autopilot — a gesture without the question</span></li>
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Only ever doing one type of check" data-ar="الاقتصار على نوع واحد فقط من الفحوص">Only ever doing one type of check</span></li>
-          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Dismissing the result (“that's just because I'm tired”)" data-ar="تجاهل النتيجة («هذا مجرد لأنني متعب»)" data-ar-literal="">Dismissing the result (“that's just because I'm tired”)</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Dismissing the result (“that's just because I'm tired”)" data-ar="تجاهل النتيجة («هذا مجرد لأنني متعب»)">Dismissing the result (“that's just because I'm tired”)</span></li>
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Doing them at the same time every day — too predictable" data-ar="أداؤها في الوقت نفسه كل يوم — متوقّع أكثر من اللازم">Doing them at the same time every day — too predictable</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Relying on the Pain Pinch alone when you actually feel pain in dreams" data-ar="الاعتماد على قرص الألم وحده بينما تشعر فعلًا بالألم في أحلامك">Relying on the Pain Pinch alone when you actually feel pain in dreams</span></li>
           <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Quitting after a week because nothing happened" data-ar="التوقف بعد أسبوع لأن شيئًا لم يحدث">Quitting after a week because nothing happened</span></li>
-          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400"></span><span data-en="Skipping them when you're busy or stressed — those are the days they matter most" data-ar="تخطّيها عندما تكون مشغولًا أو متوترًا — تلك هي الأيام التي تكون فيها الأهم">Skipping them when you're busy or stressed — those are the days they matter most</span></li>
         </ul>
       </div>
 
